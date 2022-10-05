@@ -2,6 +2,8 @@ package model;
 
 import java.util.Objects;
 
+//Represents a bug having a title, an assignee, a publisher, a boolean to check if its fixed and
+//a severity level
 public class Bug {
     private String title;
     private String assignee;
@@ -13,6 +15,10 @@ public class Bug {
     //    MEDIUM,
     //    HIGH }
 
+    //REQUIRES: title, assignee, publisher, severityLevel has a non-zero length
+    //EFFECTS: title of bug is set to title; assignee of bug is set to assignee;
+    //publisher of bug is set to publisher; severityLevel of bug to severityLevel
+    //sets the boolean fixed to false
     public Bug(String title, String assignee, String publisher, String severityLevel) {
         this.title = title;
         this.assignee = assignee;
@@ -37,9 +43,14 @@ public class Bug {
         return this.severityLevel;
     }
 
+    public boolean getFixed() {
+        return this.fixed;
+    }
+
+    //EFFECTS: sets the fixed boolean to true
+    //MODIFIES: this
     public void fixBug() {
         this.fixed = true;
-
     }
 
 

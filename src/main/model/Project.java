@@ -2,15 +2,19 @@ package model;
 
 import java.util.ArrayList;
 
+// Represents a project having a name,a creator, and an arraylist of bugs
 public class Project {
-    // delete or rename this class!
-    private String name;
-    private String creator;
-    private ArrayList<Bug> bugArrayList;
 
-    public Project(String name, String creator) {
-        this.name = name;
-        this.creator = creator;
+    private String name;                  //project name
+    private String creator;               //project creator
+    private ArrayList<Bug> bugArrayList;  //arraylist of bugs for project
+
+    //REQUIRES: projectName and projectCreator has a non-zero length
+    //EFFECTS: name on project is set to projectName; creator on project is set to projectCreator;
+    // name on project is set to projectName; Creates an arraylist to store the bugs
+    public Project(String projectName, String projectCreator) {
+        this.name = projectName;
+        this.creator = projectCreator;
         this.bugArrayList = new ArrayList<>();
     }
 
@@ -22,18 +26,23 @@ public class Project {
         return this.creator;
     }
 
+    public ArrayList<Bug> getBugArrayList() {
+        return bugArrayList;
+    }
+
+    //EFFECTS: adds bug to arraylist of bugs
+    //MODIFIES: this
     public void addBug(Bug bug) {
         bugArrayList.add(bug);
     }
 
+    //EFFECTS: adds bug to arraylist of bugs
+    //MODIFIES: this
     public void removeBug(Bug bug) {
         bugArrayList.remove(bug);
-
     }
 
-    public ArrayList<Bug> getBugArrayList() {
-        return bugArrayList;
-    }
+
 
 
 }
