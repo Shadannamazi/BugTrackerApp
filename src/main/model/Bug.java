@@ -8,12 +8,15 @@ public class Bug {
     private String title;
     private String assignee;
     private String publisher;
-    private boolean fixed;
+    private boolean isFixed;
+    /*enum SeverityLevel {
+        LOW,
+        MEDIUM,
+        HIGH
+    }*/
+
+    //private SeverityLevel severityLevel;
     private String severityLevel;
-    //private enum SeverityLevel {
-    //    LOW,
-    //    MEDIUM,
-    //    HIGH }
 
     //REQUIRES: title, assignee, publisher, severityLevel has a non-zero length
     //EFFECTS: title of bug is set to title; assignee of bug is set to assignee;
@@ -23,7 +26,7 @@ public class Bug {
         this.title = title;
         this.assignee = assignee;
         this.publisher = publisher;
-        this.fixed = false;
+        this.isFixed = false;
         this.severityLevel = severityLevel;
     }
 
@@ -43,14 +46,14 @@ public class Bug {
         return this.severityLevel;
     }
 
-    public boolean getFixed() {
-        return this.fixed;
+    public boolean isFixed() {
+        return this.isFixed;
     }
 
     //EFFECTS: sets the fixed boolean to true
     //MODIFIES: this
     public void fixBug() {
-        this.fixed = true;
+        this.isFixed = true;
     }
 
 
@@ -63,13 +66,13 @@ public class Bug {
             return false;
         }
         Bug bug = (Bug) o;
-        return fixed == bug.fixed && title.equals(bug.title) && assignee.equals(bug.assignee)
+        return isFixed == bug.isFixed && title.equals(bug.title) && assignee.equals(bug.assignee)
                 && publisher.equals(bug.publisher);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, assignee, publisher, fixed);
+        return Objects.hash(title, assignee, publisher, isFixed);
     }
 }
 

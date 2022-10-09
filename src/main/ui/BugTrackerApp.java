@@ -5,8 +5,9 @@ import model.Bug;
 import model.Project;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
+
+
 
 // Bug Tracker Application
 public class BugTrackerApp {
@@ -204,7 +205,7 @@ public class BugTrackerApp {
             for (int i = 0; i < bugsList.size();i++) {
                 Bug bug = bugsList.get(i);
                 System.out.println((i + 1) + ": " + bug.getTitle() + "    " + bug.getPublisher() + "    "
-                        + bug.getAssignee() + "    " + bug.getSeverityLevel() + "    " + bug.getFixed());
+                        + bug.getAssignee() + "    " + bug.getSeverityLevel() + "    " + bug.isFixed());
             }
         } else {
             System.out.println("No Bugs available");

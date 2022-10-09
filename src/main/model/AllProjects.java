@@ -8,7 +8,7 @@ public class AllProjects {
 
 
 
-    //EFFECTS: Creates an arraylist of projects to store the projects created
+    //EFFECTS: Creates an arraylist of projects to store the projects created which is empty at first
     public AllProjects() {
         this.projectArrayList = new ArrayList<>();
     }
