@@ -2,6 +2,7 @@ package ui;
 
 import model.AllProjects;
 import model.Bug;
+import model.BugSeverityLevel;
 import model.Project;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class BugTrackerApp {
 
     // MODIFIES: this
     // EFFECTS: processes user input
-    private void runBugTracker() {
+    public void runBugTracker() {
         boolean keepGoing = true;
         String command = null;
 
@@ -41,14 +42,12 @@ public class BugTrackerApp {
             } else {
                 processCommand(command);
             }
-
         }
-
     }
 
     // MODIFIES: this
     // EFFECTS: processes user command
-    private void processCommand(String command) {
+    public void processCommand(String command) {
 
         if (command.equals("c")) {
             Project myProject = createNewProject();
@@ -63,42 +62,8 @@ public class BugTrackerApp {
             }
 
         } else if (command.equals("v")) {
-
             if (newServer.getProjectArrayList().size() > 0) {
-
-                viewListOfProjects(newServer);
-                System.out.println("Enter the number of the project you want to select: ");
-                int numberSelectedProject = input.nextInt();
-                Project selectedProject = findProject(newServer.getProjectArrayList(), numberSelectedProject);
-
-                boolean keepGoingBug = true;
-                while (keepGoingBug) {
-                    displayBugMenu();
-                    command = input.next();
-                    command = command.toLowerCase();
-
-                    if (command.equals("a")) {
-                        Bug newBug = createNewBug();
-                        selectedProject.addBug(newBug);
-
-                    } else if (command.equals("r")) {
-                        viewHistory(selectedProject);
-                        Bug removeThisBug = removeBug(selectedProject.getBugArrayList());
-                        selectedProject.removeBug(removeThisBug);
-
-                    } else if (command.equals("h")) {
-                        viewHistory(selectedProject);
-
-                    } else if (command.equals("m")) {
-                        viewHistory(selectedProject);
-                        Bug markThisBug = markFixedBug(selectedProject.getBugArrayList());
-                        markThisBug.fixBug();
-
-                    } else if (command.equals("b")) {
-                        goBack();
-
-                    }
-                }
+                selectProject(command);
             } else {
                 System.out.println("No projects available");
             }
@@ -108,18 +73,74 @@ public class BugTrackerApp {
         }
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private Project createNewProject() {
+    // MODIFIES: this
+    // EFFECTS: processes user command for a selected project
+    public void selectProject(String command) {
+        Project selectedProject = processSelectProject();
+
+        boolean keepGoingBug = true;
+        while (keepGoingBug) {
+            displayBugMenu();
+            command = input.next();
+            command = command.toLowerCase();
+
+            if (command.equals("q")) {
+                keepGoingBug = false;
+
+            } else if (command.equals("a")) {
+                Bug newBug = createNewBug();
+                selectedProject.addBug(newBug);
+
+            } else if (command.equals("r")) {
+                processRemoveCommand(selectedProject);
+
+            } else if (command.equals("h")) {
+                viewHistory(selectedProject);
+
+            } else if (command.equals("m")) {
+                processMarkBugCommand(selectedProject);
+
+            } else if (command.equals("b")) {
+                goBack();
+            }
+        }
+    }
+
+    // EFFECTS: creates a new project with the name and creator
+    public Project createNewProject() {
         Project project = new Project(addProjectName(), addProjectCreator());
         return project;
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private Project removeProject(ArrayList<Project> projectArrayList) {
+
+    // EFFECTS: shows a menu of all projects and processes the project the user selects
+    public Project processSelectProject() {
+        viewListOfProjects(newServer);
+        System.out.println("Enter the number of the project you want to select: ");
+        int numberSelectedProject = input.nextInt();
+        Project selectedProject = findProject(newServer.getProjectArrayList(), numberSelectedProject);
+        return selectedProject;
+    }
+
+    // EFFECTS: shows a history of all bugs and removes the selected bug from the user
+    public void processRemoveCommand(Project selectedProject) {
+        viewHistory(selectedProject);
+        if (selectedProject.getBugArrayList().size() > 0) {
+            Bug removeThisBug = removeBug(selectedProject.getBugArrayList());
+            selectedProject.removeBug(removeThisBug);
+        }
+    }
+
+    // EFFECTS: shows a history of all bugs and marks the selected bug from the user to fixed
+    public void processMarkBugCommand(Project selectedProject) {
+        viewHistory(selectedProject);
+        Bug markThisBug = markFixedBug(selectedProject.getBugArrayList());
+        markThisBug.fixBug();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes the selected project from list of all projects
+    public Project removeProject(ArrayList<Project> projectArrayList) {
         viewListOfProjects(newServer);
         System.out.println("Enter the Project number that you want to remove: ");
         int projectNumberRemove = input.nextInt();
@@ -127,35 +148,29 @@ public class BugTrackerApp {
         return findProject(projectArrayList,projectNumberRemove);
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private Project findProject(ArrayList<Project> projectList, int number) {
+    // EFFECTS: finds the project selected by the user and returns it
+    public Project findProject(ArrayList<Project> projectList, int number) {
         return projectList.get((number - 1));
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private String addProjectName() {
+    // MODIFIES: this
+    // EFFECTS: takes a string input from the user and sets it to the name of the project
+    public String addProjectName() {
         System.out.println("Enter Project Name: ");
         String name = input.next();
         return name;
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private String addProjectCreator() {
+    // MODIFIES: this
+    // EFFECTS: takes a string input from the user and sets it to the creator of the project
+    public String addProjectCreator() {
         System.out.println("Enter Project Creator: ");
         String creator = input.next();
         return creator;
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private void viewListOfProjects(AllProjects server) {
+    // EFFECTS: prints all projects in the all projects
+    public void viewListOfProjects(AllProjects server) {
         ArrayList<Project> projectList = server.getProjectArrayList();
         System.out.println("   Title   Creator     ");
         for (int i = 0; i < projectList.size(); i++) {
@@ -165,40 +180,34 @@ public class BugTrackerApp {
 
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private Bug createNewBug() {
+    // MODIFIES: this
+    // EFFECTS: creates a new bug and sets the title, assignee, publisher and severity level
+    public Bug createNewBug() {
         String title = addBugTitle();
         String assignee = addBugAssignee();
         String publisher = addBugPublisher();
-        String severityLevel = addBugSeverity();
+        BugSeverityLevel severityLevel = addBugSeverity();
         bug = new Bug(title, assignee, publisher, severityLevel);
         return bug;
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private Bug removeBug(ArrayList<Bug> bugArrayList) {
+    // MODIFIES: this
+    // EFFECTS: removes the selected bug from list of all bugs
+    public Bug removeBug(ArrayList<Bug> bugArrayList) {
         System.out.println("Enter Bug number that you want to remove: ");
         int bugNumberRemove = input.nextInt();
         //find the bug in the list then remove it
         return findBug(bugArrayList,bugNumberRemove);
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private Bug findBug(ArrayList<Bug> bugsList, int number) {
+    // EFFECTS: finds the bug selected by the user and returns it
+    public Bug findBug(ArrayList<Bug> bugsList, int number) {
         //loop through array to find the bug
         return bugsList.get(number - 1);
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private void viewHistory(Project project) {
+    // EFFECTS: prints all bugs in the all bugs
+    public void viewHistory(Project project) {
         if (project.getBugArrayList().size() > 0) {
             ArrayList<Bug> bugsList = project.getBugArrayList();
             System.out.println("   Title    Publisher    Assignee    Severity Level     Fixed");
@@ -210,65 +219,52 @@ public class BugTrackerApp {
         } else {
             System.out.println("No Bugs available");
         }
-
-
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private Bug markFixedBug(ArrayList<Bug> bugArrayList) {
+    // MODIFIES: this
+    // EFFECTS: marks the bug selected by the user to fixed
+    public Bug markFixedBug(ArrayList<Bug> bugArrayList) {
         System.out.println("Enter Bug number that you want to mark as fixed: ");
         int bugNumberFix = input.nextInt();
         //find the bug in the list then fix it
         return findBug(bugArrayList,bugNumberFix);
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private void goBack() {
+    // EFFECTS: goes back to the display menu
+    public void goBack() {
         runBugTracker();
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private String addBugTitle() {
+    // EFFECTS: sets the input string from the user as the title of the bug
+    public String addBugTitle() {
         System.out.println("Enter Bug Title: ");
         String title = input.next();
         return title;
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private String addBugAssignee() {
+    // EFFECTS: sets the input string from the user as the assignee of the bug
+    public String addBugAssignee() {
         System.out.println("Enter Bug Assignee: ");
         String assignee = input.next();
         return assignee;
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private String addBugSeverity() {
-        System.out.println("Enter Bug Severity Level: ");
-        String severity = input.next();
+    // EFFECTS: sets the input string from the user as the severity level of the bug
+    public BugSeverityLevel addBugSeverity() {
+        System.out.println("Enter Bug Severity Level: (LOW, MEDIUM, HIGH) ");
+        BugSeverityLevel severity = BugSeverityLevel.valueOf(input.next());
         return severity;
     }
 
-    // REQUIRES:
-    // MODIFIES:
-    // EFFECTS:
-    private String addBugPublisher() {
+    // EFFECTS: sets the input string from the user as the publisher of the bug
+    public String addBugPublisher() {
         System.out.println("Enter Bug Publisher: ");
         String publisher = input.next();
         return publisher;
     }
 
     // EFFECTS: displays the Bug menu of options to user
-    private void displayBugMenu() {
+    public void displayBugMenu() {
         System.out.println("Select from");
         System.out.println("\ta -> Add new Bug");
         System.out.println("\tr -> Remove Bug");
@@ -278,7 +274,7 @@ public class BugTrackerApp {
     }
 
     // EFFECTS: displays the main menu of options to user
-    private void displayMenu() {
+    public void displayMenu() {
         System.out.println("Select from");
         System.out.println("\tc -> Create New Project");
         System.out.println("\tr -> Remove Project");
