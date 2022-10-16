@@ -6,8 +6,6 @@ import java.util.ArrayList;
 public class AllProjects {
     private ArrayList<Project> projectArrayList;  //list of projects created
 
-
-
     //EFFECTS: Creates an arraylist of projects to store the projects created which is empty at first
     public AllProjects() {
         this.projectArrayList = new ArrayList<>();
@@ -26,8 +24,14 @@ public class AllProjects {
     //EFFECTS: removes project from arraylist of projects
     //MODIFIES: this
     public void removeProject(Project project) {
-        projectArrayList.remove(project);
-    }
+        if (projectArrayList.contains(project)) {
+            projectArrayList.remove(project);
+        } else {
+            System.out.println("Invalid project");
+        }
 
+
+
+    }
 
 }

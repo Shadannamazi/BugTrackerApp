@@ -112,7 +112,6 @@ public class BugTrackerApp {
         return project;
     }
 
-
     // EFFECTS: shows a menu of all projects and processes the project the user selects
     public Project processSelectProject() {
         viewListOfProjects(newServer);

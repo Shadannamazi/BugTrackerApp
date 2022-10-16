@@ -33,7 +33,6 @@ class AllProjectsTest {
         allProjectsTest.addProject(project1);
         assertEquals(1,allProjectsTest.getProjectArrayList().size());
         assertEquals(project1,allProjectsTest.getProjectArrayList().get(0));
-
     }
 
     @Test
@@ -48,6 +47,22 @@ class AllProjectsTest {
         assertEquals(project2,allProjectsTest.getProjectArrayList().get(1));
         assertEquals(project3,allProjectsTest.getProjectArrayList().get(2));
         assertEquals(project4,allProjectsTest.getProjectArrayList().get(3));
+
+    }
+
+    @Test
+    public void testAddSameProject() {
+        allProjectsTest.addProject(project1);
+        assertEquals(1,allProjectsTest.getProjectArrayList().size());
+        assertEquals(project1,allProjectsTest.getProjectArrayList().get(0));
+
+        allProjectsTest.addProject(project1);
+        assertEquals(2,allProjectsTest.getProjectArrayList().size());
+        assertEquals(project1,allProjectsTest.getProjectArrayList().get(1));
+
+        allProjectsTest.addProject(project1);
+        assertEquals(3,allProjectsTest.getProjectArrayList().size());
+        assertEquals(project1,allProjectsTest.getProjectArrayList().get(2));
 
     }
 
@@ -86,5 +101,15 @@ class AllProjectsTest {
         allProjectsTest.removeProject(project4);
         assertEquals(0,allProjectsTest.getProjectArrayList().size());
         assertFalse(allProjectsTest.getProjectArrayList().contains(project4));
+    }
+
+    @Test
+    public void testRemoveNonExistent() {
+        allProjectsTest.addProject(project1);
+        allProjectsTest.addProject(project2);
+        allProjectsTest.removeProject(project3);
+        allProjectsTest.removeProject(project4);
+        assertEquals(2,allProjectsTest.getProjectArrayList().size());
+
     }
 }

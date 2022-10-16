@@ -17,9 +17,9 @@ public class ProjectTest {
     @BeforeEach
     public void runBefore() {
         testProject = new Project("testProject", "testCreator");
-        bug1 = new Bug("bug1", "assignee1", "pub1", "LOW");
-        bug2 = new Bug("bug2", "assignee2", "pub2", "MEDIUM");
-        bug3 = new Bug("bug3", "assignee3", "pub3", "HIGH");
+        bug1 = new Bug("bug1", "assignee1", "pub1", BugSeverityLevel.LOW);
+        bug2 = new Bug("bug2", "assignee2", "pub2", BugSeverityLevel.MEDIUM);
+        bug3 = new Bug("bug3", "assignee3", "pub3", BugSeverityLevel.HIGH);
     }
 
     @Test
@@ -87,4 +87,5 @@ public class ProjectTest {
         //remove from empty list
 
     }
+
 }

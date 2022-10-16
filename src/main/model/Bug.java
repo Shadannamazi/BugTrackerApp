@@ -10,13 +10,6 @@ public class Bug {
     private String assignee;
     private String publisher;
     private boolean isFixed;
-    /*enum SeverityLevel {
-        LOW,
-        MEDIUM,
-        HIGH
-    }*/
-
-    //private String severityLevel;
     private BugSeverityLevel severityLevel;
 
     //REQUIRES: title, assignee, publisher, severityLevel has a non-zero length
@@ -57,24 +50,6 @@ public class Bug {
         this.isFixed = true;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Bug bug = (Bug) o;
-        return isFixed == bug.isFixed && title.equals(bug.title) && assignee.equals(bug.assignee)
-                && publisher.equals(bug.publisher);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, assignee, publisher, isFixed);
-    }
 }
 
 
