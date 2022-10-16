@@ -26,12 +26,7 @@ public class AllProjects {
     public void removeProject(Project project) {
         if (projectArrayList.contains(project)) {
             projectArrayList.remove(project);
-        } else {
-            System.out.println("Invalid project");
         }
-
-
-
     }
 
 }

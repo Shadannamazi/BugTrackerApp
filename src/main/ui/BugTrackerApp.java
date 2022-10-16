@@ -133,8 +133,10 @@ public class BugTrackerApp {
     // EFFECTS: shows a history of all bugs and marks the selected bug from the user to fixed
     public void processMarkBugCommand(Project selectedProject) {
         viewHistory(selectedProject);
-        Bug markThisBug = markFixedBug(selectedProject.getBugArrayList());
-        markThisBug.fixBug();
+        if (selectedProject.getBugArrayList().size() > 0) {
+            Bug markThisBug = markFixedBug(selectedProject.getBugArrayList());
+            markThisBug.fixBug();
+        }
     }
 
     // MODIFIES: this
