@@ -46,6 +46,7 @@ public class Project implements Writable {
         bugArrayList.remove(bug);
     }
 
+    //EFFECTS: returns number of bugs in project
     public int getSizeBugList() {
         return bugArrayList.size();
     }
@@ -54,21 +55,13 @@ public class Project implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        //json.put("Project", projectToJson());
         json.put("name", name);
         json.put("creator", creator);
         json.put("bugArrayList", bugArrayListToJson());
         return json;
     }
 
-    /*private JSONArray projectToJson() {
-        JSONArray jsonArray = new JSONArray();
-        for (Bug b : bugArrayList) {
-            jsonArray.put(b.toJson());
-        }
-        return jsonArray;
-    }*/
-
+    //EFFECTS: converts each bug in project to Json
     private JSONArray bugArrayListToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Bug b : bugArrayList) {
@@ -76,12 +69,6 @@ public class Project implements Writable {
         }
         return jsonArray;
     }
-
-
-
-
-
-
 
 }
 

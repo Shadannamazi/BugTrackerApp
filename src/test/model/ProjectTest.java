@@ -13,7 +13,6 @@ public class ProjectTest {
     private Bug bug2;
     private Bug bug3;
 
-
     @BeforeEach
     public void runBefore() {
         testProject = new Project("testProject", "testCreator");
@@ -26,29 +25,29 @@ public class ProjectTest {
     public void testConstructor() {
         assertEquals("testProject", testProject.getName());
         assertEquals("testCreator", testProject.getCreator());
-        assertEquals(0, testProject.getBugArrayList().size());
+        assertEquals(0, testProject.getSizeBugList());
     }
 
     @Test
     public void testAddBug() {
         testProject.addBug(bug1);
         assertEquals(bug1,testProject.getBugArrayList().get(0));
-        assertEquals(1,testProject.getBugArrayList().size());
+        assertEquals(1,testProject.getSizeBugList());
     }
 
     @Test
     public void testAddBugMultiple() {
         testProject.addBug(bug1);
         assertEquals(bug1,testProject.getBugArrayList().get(0));
-        assertEquals(1,testProject.getBugArrayList().size());
+        assertEquals(1,testProject.getSizeBugList());
 
         testProject.addBug(bug2);
         assertEquals(bug2,testProject.getBugArrayList().get(1));
-        assertEquals(2,testProject.getBugArrayList().size());
+        assertEquals(2,testProject.getSizeBugList());
 
         testProject.addBug(bug3);
         assertEquals(bug3,testProject.getBugArrayList().get(2));
-        assertEquals(3,testProject.getBugArrayList().size());
+        assertEquals(3,testProject.getSizeBugList());
 
     }
 
@@ -61,7 +60,7 @@ public class ProjectTest {
         testProject.removeBug(bug1);
         assertEquals(bug2,testProject.getBugArrayList().get(0));
         assertFalse(testProject.getBugArrayList().contains(bug1));
-        assertEquals(2,testProject.getBugArrayList().size());
+        assertEquals(2,testProject.getSizeBugList());
     }
 
     @Test
@@ -71,20 +70,16 @@ public class ProjectTest {
         testProject.addBug(bug3);
 
         testProject.removeBug(bug1);
-        assertEquals(2,testProject.getBugArrayList().size());
+        assertEquals(2,testProject.getSizeBugList());
         assertFalse(testProject.getBugArrayList().contains(bug1));
 
         testProject.removeBug(bug2);
-        assertEquals(1,testProject.getBugArrayList().size());
+        assertEquals(1,testProject.getSizeBugList());
         assertFalse(testProject.getBugArrayList().contains(bug2));
 
         testProject.removeBug(bug3);
-        assertEquals(0,testProject.getBugArrayList().size());
+        assertEquals(0,testProject.getSizeBugList());
         assertFalse(testProject.getBugArrayList().contains(bug3));
-
-        //TO DO
-        //remove smth that has been removed already
-        //remove from empty list
 
     }
 

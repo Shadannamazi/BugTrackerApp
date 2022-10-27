@@ -42,6 +42,7 @@ public class Bug implements Writable {
         return this.severityLevel;
     }
 
+    //EFFECTS: return whether the bug is fixed or not fixed
     public boolean isFixed() {
         return this.isFixed;
     }
@@ -52,6 +53,7 @@ public class Bug implements Writable {
         this.isFixed = true;
     }
 
+    //EFFECTS: converts bug to Json
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

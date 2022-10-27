@@ -47,6 +47,7 @@ public class JsonReader {
     }
 
     // EFFECTS: parses AllProjects from JSON object and returns it and calls parseProject
+    // MODIFIES: allProjects
     private AllProjects parseAllProjects(JSONObject jsonObject) {
         AllProjects allProjects = new AllProjects();
 
@@ -56,13 +57,12 @@ public class JsonReader {
             Project oneProject = parseProject(allProjectsArray.getJSONObject(i));
             allProjects.addProject(oneProject);
         }
-
         return allProjects;
-
 
     }
 
     // EFFECTS: parses project from JSON object and returns it and calls parseBug
+    // MODIFIES: project
     private Project parseProject(JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         String creator = jsonObject.getString("creator");
@@ -85,7 +85,6 @@ public class JsonReader {
         String assignee = jsonObject.getString("assignee");
         String publisher = jsonObject.getString("publisher");
         Boolean fixed = jsonObject.getBoolean("fixed");
-
 
         BugSeverityLevel severityLevel = jsonObject.getEnum(BugSeverityLevel.class, "severityLevel");
 

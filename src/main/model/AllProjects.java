@@ -32,6 +32,7 @@ public class AllProjects implements Writable {
         }
     }
 
+    ////EFFECTS: returns number of projects in allProjects
     public int getNumberAllProjects() {
         return projectArrayList.size();
     }
