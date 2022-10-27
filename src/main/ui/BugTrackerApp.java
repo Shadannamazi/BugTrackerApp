@@ -1,10 +1,19 @@
 package ui;
 
+// This class has been created with help of WorkroomApp Class in JsonSerializationDemo
+//https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/master/src/main/persistence/JsonReader.java
+
+
 import model.AllProjects;
 import model.Bug;
 import model.BugSeverityLevel;
 import model.Project;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,12 +22,20 @@ import java.util.Scanner;
 // Bug Tracker Application
 public class BugTrackerApp {
     private Scanner input;
+    private static final String JSON_STORE = "./data/allProjects.json";
 
-    AllProjects newServer = new AllProjects();
+    private AllProjects allProjects;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
+    //AllProjects allProjects = new AllProjects();
     Bug bug;
 
     // EFFECTS: runs the Bug Tracker application
-    public BugTrackerApp() {
+    public BugTrackerApp() throws FileNotFoundException {
+        allProjects = new AllProjects();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runBugTracker();
     }
 
@@ -29,6 +46,7 @@ public class BugTrackerApp {
         String command = null;
 
         input = new Scanner(System.in).useDelimiter("\n");
+
 
         while (keepGoing) {
 
@@ -51,22 +69,28 @@ public class BugTrackerApp {
 
         if (command.equals("c")) {
             Project myProject = createNewProject();
-            newServer.addProject(myProject);
+            allProjects.addProject(myProject);
 
         } else if (command.equals("r")) {
-            if (newServer.getProjectArrayList().size() > 0) {
-                Project removeThisProject = removeProject(newServer.getProjectArrayList());
-                newServer.removeProject(removeThisProject);
+            if (allProjects.getProjectArrayList().size() > 0) {
+                Project removeThisProject = removeProject(allProjects.getProjectArrayList());
+                allProjects.removeProject(removeThisProject);
             } else {
                 System.out.println("No projects available");
             }
 
         } else if (command.equals("v")) {
-            if (newServer.getProjectArrayList().size() > 0) {
+            if (allProjects.getProjectArrayList().size() > 0) {
                 selectProject(command);
             } else {
                 System.out.println("No projects available");
             }
+
+        } else if (command.equals("s")) {
+            saveAllProjects();
+
+        } else if (command.equals("l")) {
+            loadAllProjects();
 
         } else {
             System.out.println("Selection not valid...");
@@ -101,7 +125,7 @@ public class BugTrackerApp {
                 processMarkBugCommand(selectedProject);
 
             } else if (command.equals("b")) {
-                goBack();
+                keepGoingBug = false;
             }
         }
     }
@@ -114,10 +138,10 @@ public class BugTrackerApp {
 
     // EFFECTS: shows a menu of all projects and processes the project the user selects
     public Project processSelectProject() {
-        viewListOfProjects(newServer);
+        viewListOfProjects(allProjects);
         System.out.println("Enter the number of the project you want to select: ");
         int numberSelectedProject = input.nextInt();
-        Project selectedProject = findProject(newServer.getProjectArrayList(), numberSelectedProject);
+        Project selectedProject = findProject(allProjects.getProjectArrayList(), numberSelectedProject);
         return selectedProject;
     }
 
@@ -142,7 +166,7 @@ public class BugTrackerApp {
     // MODIFIES: this
     // EFFECTS: removes the selected project from list of all projects
     public Project removeProject(ArrayList<Project> projectArrayList) {
-        viewListOfProjects(newServer);
+        viewListOfProjects(allProjects);
         System.out.println("Enter the Project number that you want to remove: ");
         int projectNumberRemove = input.nextInt();
         //find the bug in the list then remove it
@@ -173,10 +197,9 @@ public class BugTrackerApp {
     // EFFECTS: prints all projects in the all projects
     public void viewListOfProjects(AllProjects server) {
         ArrayList<Project> projectList = server.getProjectArrayList();
-        System.out.println("   Title   Creator     ");
         for (int i = 0; i < projectList.size(); i++) {
             Project project = projectList.get(i);
-            System.out.println((i + 1) + ": " + project.getName() + "    " + project.getCreator());
+            System.out.println((i + 1) + ": Title: " + project.getName() + "      Creator: " + project.getCreator());
         }
 
     }
@@ -211,11 +234,13 @@ public class BugTrackerApp {
     public void viewHistory(Project project) {
         if (project.getBugArrayList().size() > 0) {
             ArrayList<Bug> bugsList = project.getBugArrayList();
-            System.out.println("   Title    Publisher    Assignee    Severity Level     Fixed");
             for (int i = 0; i < bugsList.size();i++) {
                 Bug bug = bugsList.get(i);
-                System.out.println((i + 1) + ": " + bug.getTitle() + "    " + bug.getPublisher() + "    "
-                        + bug.getAssignee() + "    " + bug.getSeverityLevel() + "    " + bug.isFixed());
+                System.out.println((i + 1) + ": Title: " + bug.getTitle());
+                System.out.println("   Publisher: " + bug.getPublisher());
+                System.out.println("   Assignee: " + bug.getAssignee());
+                System.out.println("   Severity Level: " + bug.getSeverityLevel());
+                System.out.println("   Fixed: " + bug.isFixed());
             }
         } else {
             System.out.println("No Bugs available");
@@ -231,10 +256,7 @@ public class BugTrackerApp {
         return findBug(bugArrayList,bugNumberFix);
     }
 
-    // EFFECTS: goes back to the display menu
-    public void goBack() {
-        runBugTracker();
-    }
+
 
     // EFFECTS: sets the input string from the user as the title of the bug
     public String addBugTitle() {
@@ -280,5 +302,35 @@ public class BugTrackerApp {
         System.out.println("\tc -> Create New Project");
         System.out.println("\tr -> Remove Project");
         System.out.println("\tv -> View and Select Projects");
+        System.out.println("\ts -> Save project to file");
+        System.out.println("\tl -> Load project from file");
+        System.out.println("\tq -> Quit");
     }
+
+
+
+    // EFFECTS: saves the workroom to file
+    private void saveAllProjects() {
+        try {
+            jsonWriter.open();
+            jsonWriter.writeAllProjects(allProjects);
+            jsonWriter.close();
+            System.out.println("Saved all projects to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadAllProjects() {
+        try {
+            allProjects = jsonReader.read();
+            System.out.println("Loaded all projects from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
+
 }

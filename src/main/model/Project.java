@@ -1,9 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 // Represents a project having a name,a creator, and an arraylist of bugs
-public class Project {
+public class Project implements Writable {
 
     private String name;                  //project name
     private String creator;               //project creator
@@ -41,6 +45,40 @@ public class Project {
     public void removeBug(Bug bug) {
         bugArrayList.remove(bug);
     }
+
+    public int getSizeBugList() {
+        return bugArrayList.size();
+    }
+
+    //EFFECTS: converts project to Json
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        //json.put("Project", projectToJson());
+        json.put("name", name);
+        json.put("creator", creator);
+        json.put("bugArrayList", bugArrayListToJson());
+        return json;
+    }
+
+    /*private JSONArray projectToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Bug b : bugArrayList) {
+            jsonArray.put(b.toJson());
+        }
+        return jsonArray;
+    }*/
+
+    private JSONArray bugArrayListToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Bug b : bugArrayList) {
+            jsonArray.put(b.toJson());
+        }
+        return jsonArray;
+    }
+
+
+
 
 
 

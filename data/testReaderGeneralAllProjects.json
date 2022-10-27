@@ -1,0 +1,37 @@
+{
+  "numOfAllProjects": 2,
+  "All Projects": [
+    {
+      "bugArrayList": [
+        {
+          "severityLevel": "LOW",
+          "publisher": "bruno",
+          "fixed": false,
+          "assignee": "kelly",
+          "title": "bug1"
+        },
+        {
+          "severityLevel": "HIGH",
+          "publisher": "larry",
+          "fixed": true,
+          "assignee": "jake",
+          "title": "bug2"
+        },
+        {
+          "severityLevel": "MEDIUM",
+          "publisher": "billy",
+          "fixed": false,
+          "assignee": "mark",
+          "title": "bug3"
+        }
+      ],
+      "creator": "creator 1",
+      "name": "proj1"
+    },
+    {
+      "bugArrayList": [],
+      "creator": "creator 2",
+      "name": "proj2"
+    }
+  ]
+}

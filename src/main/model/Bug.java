@@ -2,10 +2,12 @@ package model;
 
 import java.util.Objects;
 import model.BugSeverityLevel;
+import org.json.JSONObject;
+import persistence.Writable;
 
 //Represents a bug having a title, an assignee, a publisher, a boolean to check if its fixed and
 //a severity level
-public class Bug {
+public class Bug implements Writable {
     private String title;
     private String assignee;
     private String publisher;
@@ -50,6 +52,16 @@ public class Bug {
         this.isFixed = true;
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("title", title);
+        json.put("assignee", assignee);
+        json.put("publisher", publisher);
+        json.put("fixed", isFixed);
+        json.put("severityLevel", severityLevel);
+        return json;
+    }
 }
 
 

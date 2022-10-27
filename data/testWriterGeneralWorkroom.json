@@ -1,0 +1,36 @@
+{
+    "numOfAllProjects": 2,
+    "All Projects": [
+        {
+            "bugArrayList": [
+                {
+                    "severityLevel": "LOW",
+                    "publisher": "writer1",
+                    "fixed": false,
+                    "assignee": "sam",
+                    "title": "myBug1"
+                },
+                {
+                    "severityLevel": "HIGH",
+                    "publisher": "writer2",
+                    "fixed": false,
+                    "assignee": "sarah",
+                    "title": "myBug2"
+                }
+            ],
+            "creator": "writerCreator1",
+            "name": "myProject"
+        },
+        {
+            "bugArrayList": [{
+                "severityLevel": "MEDIUM",
+                "publisher": "writer3",
+                "fixed": false,
+                "assignee": "smith",
+                "title": "myBug3"
+            }],
+            "creator": "writerCreator2",
+            "name": "myProject2"
+        }
+    ]
+}
