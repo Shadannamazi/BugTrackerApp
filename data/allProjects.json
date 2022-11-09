@@ -1,57 +1,30 @@
 {
-    "numOfAllProjects": 3,
+    "numOfAllProjects": 2,
     "All Projects": [
         {
             "bugArrayList": [
                 {
                     "severityLevel": "LOW",
-                    "publisher": "kelly",
+                    "publisher": "b",
                     "fixed": false,
-                    "assignee": "sally",
-                    "title": "bug1"
-                },
-                {
-                    "severityLevel": "MEDIUM",
-                    "publisher": "max",
-                    "fixed": false,
-                    "assignee": "leo",
-                    "title": "bug2"
+                    "assignee": "hj",
+                    "title": "gh"
                 },
                 {
                     "severityLevel": "HIGH",
-                    "publisher": "np",
-                    "fixed": true,
-                    "assignee": "mark",
-                    "title": "bug3"
+                    "publisher": "df",
+                    "fixed": false,
+                    "assignee": "hj",
+                    "title": "bug2"
                 }
             ],
-            "creator": "craetor1",
-            "name": "proj1"
+            "creator": "gjhk",
+            "name": "pro1"
         },
         {
             "bugArrayList": [],
-            "creator": "creator2",
-            "name": "proj2"
-        },
-        {
-            "bugArrayList": [
-                {
-                    "severityLevel": "LOW",
-                    "publisher": "jess",
-                    "fixed": false,
-                    "assignee": "",
-                    "title": "bug4"
-                },
-                {
-                    "severityLevel": "HIGH",
-                    "publisher": "shadi",
-                    "fixed": false,
-                    "assignee": "panda",
-                    "title": "bug5"
-                }
-            ],
-            "creator": "creator3",
-            "name": "proj3"
+            "creator": "h",
+            "name": "nm"
         }
     ]
 }
