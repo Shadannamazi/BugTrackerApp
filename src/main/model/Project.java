@@ -13,10 +13,12 @@ public class Project implements Writable {
     private String creator;               //project creator
     private ArrayList<Bug> bugArrayList;  //arraylist of bugs for project
 
+
     //REQUIRES: projectName and projectCreator has a non-zero length
     //EFFECTS: name on project is set to projectName; creator on project is set to projectCreator;
     // name on project is set to projectName; Creates an arraylist to store the bugs
     public Project(String projectName, String projectCreator) {
+
         this.name = projectName;
         this.creator = projectCreator;
         this.bugArrayList = new ArrayList<>();
@@ -50,6 +52,8 @@ public class Project implements Writable {
     public int getSizeBugList() {
         return bugArrayList.size();
     }
+
+
 
     //EFFECTS: converts project to Json
     @Override

@@ -1,25 +1,30 @@
 {
-    "numOfAllProjects": 4,
-    "All Projects": [
-        {
-            "bugArrayList": [],
-            "creator": "shadi",
-            "name": "project 1"
-        },
-        {
-            "bugArrayList": [],
-            "creator": "shadi ",
-            "name": "proj 2 "
-        },
-        {
-            "bugArrayList": [],
-            "creator": "shadi 2",
-            "name": "proj 3"
-        },
-        {
-            "bugArrayList": [],
-            "creator": "shadi 33",
-            "name": "proj 34"
-        }
-    ]
+    "numOfAllProjects": 1,
+    "All Projects": [{
+        "bugArrayList": [
+            {
+                "severityLevel": "LOW",
+                "publisher": "fefweg",
+                "fixed": false,
+                "assignee": "wrgwrg",
+                "title": "bug1"
+            },
+            {
+                "severityLevel": "LOW",
+                "publisher": "fefwegif",
+                "fixed": false,
+                "assignee": "wrgwrgqq",
+                "title": "bugkgfewuhf"
+            },
+            {
+                "severityLevel": "LOW",
+                "publisher": "mcmsdnc",
+                "fixed": false,
+                "assignee": "wrgwrgqq",
+                "title": "loldoweofcf"
+            }
+        ],
+        "creator": "dcwecwe",
+        "name": "proj1"
+    }]
 }
