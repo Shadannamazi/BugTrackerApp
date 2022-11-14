@@ -45,6 +45,9 @@ public class ProjectFrame extends AllFrames implements ActionListener {
     private Project project;
     private AllProjects allProjects;
 
+    protected DefaultTableModel tableModel;
+    protected JTable table;
+
     public ProjectFrame(AllProjects allProjects,Project project) {
 
 
@@ -172,6 +175,28 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         }
     }
 
+    //https://stackoverflow.com/questions/20526917/load-arraylist-data-into-jtable
+    public void drawBugTable(JComponent panel) {
+        ArrayList<Bug> bugList = project.getBugArrayList();
+
+        String[] columnNames = {"#", "Title", "Publisher", "Assignee", "Severity Level", "Fixed"};
+        tableModel = new DefaultTableModel(columnNames, 0);
+        table = new JTable(tableModel);
+        table.setBounds(0, 0, 480,bugList.size() * 21);
+        table.setShowHorizontalLines(true);
+        table.setGridColor(new Color(40,40,40));
+        table.getColumnModel().getColumn(0).setPreferredWidth(5);
+        table.getColumnModel().getColumn(5).setPreferredWidth(5);
+
+        tableModel.addRow(columnNames);
+
+        panel.add(table);
+
+
+
+    }
+
+
     public void showUpdatedRemoveBugPanel() {
 
         if (project != null) {
@@ -222,6 +247,7 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         return dataForTable;
     }*/
 
+
     public void showUpdatedAllBugsPanel() {
         if (project != null) {
             if (project.getSizeBugList() > 0) {
@@ -243,7 +269,7 @@ public class ProjectFrame extends AllFrames implements ActionListener {
                 }*/
 
                 ArrayList<Bug> bugList = project.getBugArrayList();
-                //https://stackoverflow.com/questions/20526917/load-arraylist-data-into-jtable
+                /*//https://stackoverflow.com/questions/20526917/load-arraylist-data-into-jtable
                 String[] columnNames = {"Title", "Publisher", "Assignee", "Severity Level", "Fixed"};
                 DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
                 JTable table = new JTable(tableModel);
@@ -252,14 +278,15 @@ public class ProjectFrame extends AllFrames implements ActionListener {
                 table.setGridColor(new Color(40,40,40));
 
                 tableModel.addRow(columnNames);
-                viewAllPanel.add(table);
+                viewAllPanel.add(table);*/
+                drawBugTable(viewAllPanel);
 
                 for (int i = 0; i < bugList.size(); i++) {
 
                     Bug bug = bugList.get(i);
 
 
-                    Object[] bugRow = {bug.getTitle(),bug.getPublisher(),bug.getAssignee(),bug.getSeverityLevel(),
+                    Object[] bugRow = {i + 1, bug.getTitle(),bug.getPublisher(),bug.getAssignee(),bug.getSeverityLevel(),
                             bug.isFixed()};
 
                     tableModel.addRow(bugRow);

@@ -1,30 +1,47 @@
 {
-    "numOfAllProjects": 1,
-    "All Projects": [{
-        "bugArrayList": [
-            {
-                "severityLevel": "LOW",
-                "publisher": "fefweg",
-                "fixed": false,
-                "assignee": "wrgwrg",
-                "title": "bug1"
-            },
-            {
-                "severityLevel": "LOW",
-                "publisher": "fefwegif",
-                "fixed": false,
-                "assignee": "wrgwrgqq",
-                "title": "bugkgfewuhf"
-            },
-            {
-                "severityLevel": "LOW",
-                "publisher": "mcmsdnc",
-                "fixed": false,
-                "assignee": "wrgwrgqq",
-                "title": "loldoweofcf"
-            }
-        ],
-        "creator": "dcwecwe",
-        "name": "proj1"
-    }]
+    "numOfAllProjects": 4,
+    "All Projects": [
+        {
+            "bugArrayList": [
+                {
+                    "severityLevel": "LOW",
+                    "publisher": "fefweg",
+                    "fixed": false,
+                    "assignee": "wrgwrg",
+                    "title": "bug1"
+                },
+                {
+                    "severityLevel": "LOW",
+                    "publisher": "fefwegif",
+                    "fixed": false,
+                    "assignee": "wrgwrgqq",
+                    "title": "bugkgfewuhf"
+                },
+                {
+                    "severityLevel": "LOW",
+                    "publisher": "mcmsdnc",
+                    "fixed": false,
+                    "assignee": "wrgwrgqq",
+                    "title": "loldoweofcf"
+                }
+            ],
+            "creator": "dcwecwe",
+            "name": "proj1"
+        },
+        {
+            "bugArrayList": [],
+            "creator": "creator 2",
+            "name": "proj 2"
+        },
+        {
+            "bugArrayList": [],
+            "creator": "creator 3",
+            "name": "proj 3"
+        },
+        {
+            "bugArrayList": [],
+            "creator": "creator 4",
+            "name": "proj 4"
+        }
+    ]
 }
