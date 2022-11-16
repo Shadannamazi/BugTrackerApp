@@ -44,6 +44,8 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
     protected JTextField fieldProjectCreator = new JTextField();
     protected JButton createProjectButton = new JButton("Create New Project");
     protected JButton removeProjectButton = new JButton("Remove Project");
+
+
     protected JTextField fieldRemoveProject = new JTextField();
 
     protected JButton loadProjectsButton = new JButton("Load Projects");
@@ -86,6 +88,8 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
 
 
         frame.setVisible(true);
+        this.revalidate();
+        this.repaint();
     }
 
 
@@ -122,6 +126,8 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
         frame.add(selectProject);
 
         createTabs();
+        this.revalidate();
+        this.repaint();
 
 
     }
@@ -156,11 +162,13 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
 
 
 
-tabbedPane.setComponentAt(0,createProjectPanel);
+        tabbedPane.setComponentAt(0,createProjectPanel);
         tabbedPane.setComponentAt(1,removeProjectPanel);
         tabbedPane.setComponentAt(2,viewAllProjectsPanel);
 
         mainPanel.add(tabbedPane);
+        this.revalidate();
+        this.repaint();
 
 
     }
@@ -186,6 +194,8 @@ tabbedPane.setComponentAt(0,createProjectPanel);
         projectCreator.setForeground(Color.white);
         createProjectPanel.add(projectName);
         createProjectPanel.add(projectCreator);
+        this.revalidate();
+        this.repaint();
 
         return createProjectPanel;
     }
@@ -193,6 +203,8 @@ tabbedPane.setComponentAt(0,createProjectPanel);
     public JComponent viewAllProjects() {
 
         showUpdatedProjects();
+        this.revalidate();
+        this.repaint();
 
 
         return viewAllProjectsPanel;
@@ -212,22 +224,12 @@ tabbedPane.setComponentAt(0,createProjectPanel);
 
         removeProjectPanel.add(removeProject);
         showUpdatedProjects();
+        this.revalidate();
+        this.repaint();
 
         return removeProjectPanel;
     }
 
-public void test() {
-        System.out.println(allProjects.getProjectArrayList().size());
-
-        this.revalidate();
-        ArrayList<Project> projectList = allProjects.getProjectArrayList();
-        for (int i = 0; i < projectList.size(); i++) {
-            Project project = projectList.get(i);
-            System.out.println("proj" + project.getName() + project.getCreator());
-
-
-        }
-    }
 
 
 
@@ -241,6 +243,7 @@ public void test() {
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
+        showUpdatedProjects();
     }
 
     // MODIFIES: this
@@ -252,7 +255,7 @@ public void test() {
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
-        //viewAllProjects();
+        showUpdatedProjects();
     }
 
     @Override
@@ -293,6 +296,7 @@ public void test() {
         showUpdatedAllProjectsPanel();
         showUpdatedRemoveProjectPanel();
         frame.revalidate();
+        frame.repaint();
 
     }
 
@@ -335,6 +339,7 @@ public void test() {
 
 
                 this.revalidate();
+                this.repaint();
             }
 
         }
@@ -367,12 +372,14 @@ public void test() {
                         }
                     }
                 });
-                this.revalidate();
+
+
 
                 viewAllProjectsPanel.add(projectButton, BorderLayout.CENTER);
                 wasteButtonsAllProjects.add(projectButton);
 
                 this.revalidate();
+                this.repaint();
             }
 
         }

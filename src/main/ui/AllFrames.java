@@ -29,7 +29,7 @@ public abstract class AllFrames extends JFrame implements ActionListener {
 
 
     //////////
-    ArrayList<JButton> wasteButtonsCreate = new ArrayList<>();
+    ArrayList<Object[]> wasteButtonsCreate = new ArrayList<>();
     ArrayList<JButton> wasteButtonsRemove = new ArrayList<>();
     protected JComponent viewAllPanel = new JPanel();
     protected JComponent removePanel = new JPanel();
@@ -85,6 +85,8 @@ public abstract class AllFrames extends JFrame implements ActionListener {
 
         //test();
 
+        this.revalidate();
+        this.repaint();
 
         viewAllPanel.setLayout(null);
         removePanel.setLayout(null);
@@ -127,6 +129,8 @@ public abstract class AllFrames extends JFrame implements ActionListener {
         frame.add(selectProject);
 
         createTabs(tab1,tab2,tab3);
+        this.revalidate();
+        this.repaint();
 
 
     }
@@ -152,7 +156,9 @@ public abstract class AllFrames extends JFrame implements ActionListener {
 
 
 
+
         this.revalidate();
+        this.repaint();
         JComponent viewForTab = createTab3();
         //viewForTab.setBounds(250,0,75,25);
         viewForTab.setBackground(new Color(90, 90, 90));
@@ -176,6 +182,8 @@ public abstract class AllFrames extends JFrame implements ActionListener {
         createButtonTab1.addActionListener(this);
         createPanelTab1.add(createButtonTab1, BorderLayout.CENTER);
 
+        this.revalidate();
+        this.repaint();
 
         return createPanelTab1;
     }
@@ -193,6 +201,8 @@ public abstract class AllFrames extends JFrame implements ActionListener {
         removePanel.add(fieldRemoveTab2,BorderLayout.CENTER);
 
         showUpdated();
+        this.revalidate();
+        this.repaint();
 
         return removePanel;
     }
@@ -200,6 +210,8 @@ public abstract class AllFrames extends JFrame implements ActionListener {
     protected JComponent createTab3() {
 
         showUpdated();
+        this.revalidate();
+        this.repaint();
 
         return viewAllPanel;
     }
@@ -216,6 +228,7 @@ public abstract class AllFrames extends JFrame implements ActionListener {
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
+        showUpdated();
     }
 
     // MODIFIES: this
@@ -227,7 +240,7 @@ public abstract class AllFrames extends JFrame implements ActionListener {
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
-        //viewAllProjects();
+        showUpdated();
     }
 
     @Override

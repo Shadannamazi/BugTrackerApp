@@ -9,6 +9,7 @@ import persistence.JsonWriter;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,6 +34,10 @@ public class ProjectFrame extends AllFrames implements ActionListener {
     protected JLabel removeBug = new JLabel("Select Bug: ");
     protected JButton createBugButton;
     protected JButton removeBugButton;
+
+    protected JButton fixBugButton;
+    protected JLabel fixBug;
+    protected JTextField fieldFixBug;
 
     protected JTextField fieldBugName;
     protected JTextField fieldBugPublisher;
@@ -63,6 +68,7 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         this.project = project;
 
 
+
         //project = allProjects.getProjectArrayList().get(indexProj);
         //this.projectName = project.getName();
         //this.projectCreator = project.getCreator();
@@ -75,6 +81,7 @@ public class ProjectFrame extends AllFrames implements ActionListener {
 
 
 
+
     @Override
     public void showUpdated() {
         resetViewAllBugs();
@@ -82,6 +89,7 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         showUpdatedAllBugsPanel();
         showUpdatedRemoveBugPanel();
         frame.revalidate();
+        frame.repaint();
 
     }
 
@@ -153,6 +161,27 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         return removePanel;
     }
 
+    @Override
+    public JComponent createTab3() {
+        viewAllPanel = super.createTab3();
+        fixBugButton = new JButton("Fix Bug");
+        fixBug = new JLabel("Select Bug: ");
+        fieldFixBug = new JTextField();
+
+        fixBugButton.setBounds(0, 500, 475, 25);
+        fixBugButton.addActionListener(this);
+        viewAllPanel.add(fixBugButton, BorderLayout.CENTER);
+
+        fieldFixBug.setBounds(115, 475, 355, 25);
+
+        viewAllPanel.add(fieldFixBug,BorderLayout.CENTER);
+        fixBug.setBounds(15, 475, 125, 25);
+        fixBug.setForeground(Color.white);
+
+        viewAllPanel.add(fixBug);
+        return viewAllPanel;
+    }
+
 
 
 
@@ -161,9 +190,17 @@ public class ProjectFrame extends AllFrames implements ActionListener {
     // MODIFIES: this
     // EFFECTS: resets view projects
     public void resetViewAllBugs() {
-        for (JButton button : wasteButtonsCreate) {
-            viewAllPanel.remove(button);
+        if (table != null) {
+            viewAllPanel.remove(table);
         }
+
+        /*for (int i = 0; i < wasteButtonsCreate.size(); i++) {
+            table.removeRow(i + 1);
+
+        }*/
+        /*for (Object[] bug : wasteButtonsCreate) {
+            viewAllPanel.remove(button);
+        }*/
     }
 
 
@@ -180,13 +217,24 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         ArrayList<Bug> bugList = project.getBugArrayList();
 
         String[] columnNames = {"#", "Title", "Publisher", "Assignee", "Severity Level", "Fixed"};
-        tableModel = new DefaultTableModel(columnNames, 0);
+        tableModel = new DefaultTableModel(columnNames, 0) {
+
+            boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false,true
+            };
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+
+                return columnIndex == 5;
+            }
+        };
         table = new JTable(tableModel);
-        table.setBounds(0, 0, 480,bugList.size() * 21);
+        table.setBounds(0, 0, 480,(bugList.size() + 1) * 16);
         table.setShowHorizontalLines(true);
         table.setGridColor(new Color(40,40,40));
         table.getColumnModel().getColumn(0).setPreferredWidth(5);
         table.getColumnModel().getColumn(5).setPreferredWidth(5);
+
 
         tableModel.addRow(columnNames);
 
@@ -234,51 +282,16 @@ public class ProjectFrame extends AllFrames implements ActionListener {
     }
 
 
-    /*//https://stackoverflow.com/questions/45263672/how-to-populate-jtable-with-arraylist-values
-    private static Object[][] getTableData(ArrayList<Bug> data, String[] columns) throws IllegalAccessException, NoSuchFieldException {
-        Object[][] dataForTable = new Object[data.size()][columns.length];
-
-        for (int i = 0; i < data.size(); i++) {
-
-            String value = data.get(i).getClass().getDeclaredField(columns[column]).get(data.get(i)).toString();
-            dataForTable[i][column] = value;
-
-        }
-        return dataForTable;
-    }*/
 
 
     public void showUpdatedAllBugsPanel() {
+
+
         if (project != null) {
             if (project.getSizeBugList() > 0) {
 
-
-
-                /*try {
-                    Object[][] data = getTableData(project.getBugArrayList(),columnNames);
-                    JTable table = new JTable(data, columnNames);
-                    JScrollPane scrollPane = new JScrollPane(table);
-                    table.setFillsViewportHeight(true);
-                    scrollPane.setBounds(0, 25, 475, 25);
-                    viewAllPanel.add(scrollPane);
-
-                } catch (IllegalAccessException e) {
-                    System.out.println("Illegal access");
-                } catch (NoSuchFieldException e) {
-                    System.out.println("No such file");
-                }*/
-
                 ArrayList<Bug> bugList = project.getBugArrayList();
-                /*//https://stackoverflow.com/questions/20526917/load-arraylist-data-into-jtable
-                String[] columnNames = {"Title", "Publisher", "Assignee", "Severity Level", "Fixed"};
-                DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
-                JTable table = new JTable(tableModel);
-                table.setBounds(0, 0, 480,bugList.size() * 21);
-                table.setShowHorizontalLines(true);
-                table.setGridColor(new Color(40,40,40));
 
-                tableModel.addRow(columnNames);
-                viewAllPanel.add(table);*/
                 drawBugTable(viewAllPanel);
 
                 for (int i = 0; i < bugList.size(); i++) {
@@ -289,31 +302,15 @@ public class ProjectFrame extends AllFrames implements ActionListener {
                     Object[] bugRow = {i + 1, bug.getTitle(),bug.getPublisher(),bug.getAssignee(),bug.getSeverityLevel(),
                             bug.isFixed()};
 
+
                     tableModel.addRow(bugRow);
 
-                    /*JButton bugButton = new JButton((i + 1) + ": Title: " + bug.getTitle()
-                            + "   Publisher: " + bug.getPublisher()
-                            + "   Assignee: " + bug.getAssignee()
-                            + "   Severity Level: " + bug.getSeverityLevel()
-                            + "   Fixed: " + bug.isFixed());
-
-
-                    bugButton.setBounds(0, i * 25 + 25, 475, 25);
-                    bugButton.setHorizontalAlignment(SwingConstants.LEFT);
-                    bugButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (e.getSource() == bugButton) {
-                                BugFrame newBugFrame = new BugFrame(bug.getTitle());
-                            }
-                        }
-                    });*/
 
                     this.revalidate();
+                    this.repaint();
 
                     //viewAllPanel.add(bugButton, BorderLayout.CENTER);
-                    //wasteButtonsCreate.add(bugButton);
-
+                    wasteButtonsCreate.add(bugRow);
                     this.revalidate();
                 }
 
@@ -329,9 +326,9 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         if (e.getSource() == createButtonTab1) {
             BugSeverityLevel severityLevel = BugSeverityLevel.LOW;
 
-            if (e.getSource() == bugSeverityLevelList) {
-                severityLevel = (BugSeverityLevel) bugSeverityLevelList.getSelectedItem();
-            }
+
+            severityLevel = (BugSeverityLevel) bugSeverityLevelList.getSelectedItem();
+
 
             Bug bug = new Bug(fieldBugName.getText(), fieldBugAssignee.getText(), fieldBugPublisher.getText(),
                     severityLevel);
@@ -348,6 +345,12 @@ public class ProjectFrame extends AllFrames implements ActionListener {
 
             //deleteProjectFromJson(removeProject);
             //showUpdatedProjects();
+
+
+        } else if (e.getSource() == fixBugButton) {
+
+
+            project.getBugArrayList().get(Integer.parseInt(fieldFixBug.getText()) - 1).fixBug();
 
 
         } else if (e.getSource() == refreshButton) {
@@ -374,6 +377,7 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
+        showUpdated();
     }
 
     /*
