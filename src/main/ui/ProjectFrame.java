@@ -41,8 +41,7 @@ public class ProjectFrame extends AllFrames implements ActionListener {
     protected JTextField fieldBugAssignee;
     protected JCheckBox checkBoxBugIsFixed;
     protected JComboBox bugSeverityLevelList;
-    private String projectName;
-    private String projectCreator;
+
 
     private Project project;
     private AllProjects allProjects;
