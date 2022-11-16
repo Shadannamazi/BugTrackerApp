@@ -20,21 +20,16 @@ public abstract class AllFrames extends JFrame implements ActionListener {
     public static final int HEIGHT = 600;
     public static final Color COLOR = new Color(40, 40, 40);
 
-
     protected static final String JSON_STORE = "./data/allProjects.json";
     protected AllProjects allProjects = new AllProjects();
     protected JsonWriter jsonWriter;
     protected JsonReader jsonReader;
 
-
-
-    //////////
     ArrayList<Object[]> wasteButtonsCreate = new ArrayList<>();
     ArrayList<JButton> wasteButtonsRemove = new ArrayList<>();
     protected JComponent viewAllPanel = new JPanel();
     protected JComponent removePanel = new JPanel();
     protected JComponent createPanelTab1 = new JPanel();
-
 
 
     protected JFrame frame = new JFrame();
@@ -44,9 +39,6 @@ public abstract class AllFrames extends JFrame implements ActionListener {
     protected JButton removeButtonTab2;
     protected JTextField fieldRemoveTab2 = new JTextField();
 
-    //protected JTextField fieldName = new JTextField();
-    //protected JTextField fieldProjectCreator = new JTextField();
-
     protected JButton loadButton = new JButton("Load Activity");
     protected JButton saveActivityButton = new JButton("Save Activity");
     protected JButton refreshButton = new JButton("Refresh");
@@ -54,7 +46,6 @@ public abstract class AllFrames extends JFrame implements ActionListener {
     protected JLabel projectName = new JLabel("Name");
     protected JLabel projectCreator = new JLabel("Creator");
     protected JLabel removeLabel;
-    //protected JLabel selectProject = new JLabel("Select Project: ");
 
 
     //type: bug or project
@@ -63,34 +54,21 @@ public abstract class AllFrames extends JFrame implements ActionListener {
         createButtonTab1 = new JButton("Create New " + type);
         removeButtonTab2 = new JButton("Remove " + type);
         removeLabel = new JLabel("Select " + type + ": ");
-        //frame.setLayout(null);
+
         frame.setTitle(title);
         frame.setSize(WIDTH,HEIGHT);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.setResizable(false);
-
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(COLOR);
-        //mainPanel.setLayout(new GridLayout(0,1));
-        //mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
         createButtonsForFrame(tab1,tab2,tab3);
-
-
-        //allProjects = new AllProjects();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-
-
-        //createSaveAndLoad();
-
-        //test();
 
         this.revalidate();
         this.repaint();
 
         viewAllPanel.setLayout(null);
         removePanel.setLayout(null);
-
 
         frame.setVisible(true);
     }
@@ -107,24 +85,14 @@ public abstract class AllFrames extends JFrame implements ActionListener {
 
         ImageIcon bugLogo = new ImageIcon(new ImageIcon("data/bugLogo.png").getImage().getScaledInstance(
                 100, 50, Image.SCALE_DEFAULT));
-        //selectProject.setForeground(Color.white);
+
         selectProject.setVerticalAlignment(JLabel.TOP);
         selectProject.setIcon(bugLogo);
         selectProject.setBounds(0,0,500,50);
 
-        saveActivityButton.setBounds(0, 50, 100, 50);
-        saveActivityButton.addActionListener(this);
-        frame.add(saveActivityButton, BorderLayout.CENTER);
-
-        loadButton.setBounds(0, 100, 100, 50);
-        loadButton.addActionListener(this);
-        frame.add(loadButton, BorderLayout.CENTER);
-
-
-        refreshButton.setBounds(0, 150, 100, 50);
-        refreshButton.addActionListener(this);
-        frame.add(refreshButton, BorderLayout.CENTER);
-
+        setSaveActivityButton();
+        setLoadButton();
+        setRefreshButton();
 
         frame.add(selectProject);
 
@@ -135,48 +103,49 @@ public abstract class AllFrames extends JFrame implements ActionListener {
 
     }
 
+    protected void setSaveActivityButton() {
+        saveActivityButton.setBounds(0, 50, 100, 50);
+        saveActivityButton.addActionListener(this);
+        frame.add(saveActivityButton, BorderLayout.CENTER);
+    }
+
+    protected void setLoadButton() {
+        loadButton.setBounds(0, 100, 100, 50);
+        loadButton.addActionListener(this);
+        frame.add(loadButton, BorderLayout.CENTER);
+    }
+
+    protected void setRefreshButton() {
+        refreshButton.setBounds(0, 150, 100, 50);
+        refreshButton.addActionListener(this);
+        frame.add(refreshButton, BorderLayout.CENTER);
+    }
 
     protected void createTabs(String tab1, String tab2, String tab3) {
 
         JTabbedPane tabbedPane = new JTabbedPane();
-        //tabbedPane.setLayout(null);
         tabbedPane.setBackground(Color.DARK_GRAY);
 
         JComponent createForTab = createTab1();
         createForTab.setBackground(new Color(90, 90, 90));
-        //createForTab.setBounds(50,0,75,25);
         tabbedPane.addTab(tab1,createForTab);
-
-
 
         JComponent removeForTab = createTab2();
         removeForTab.setBackground(new Color(90, 90, 90));
-        //removeForTab.setBounds(150,0,75,25);
         tabbedPane.addTab(tab2,removeForTab);
-
-
-
 
         this.revalidate();
         this.repaint();
         JComponent viewForTab = createTab3();
-        //viewForTab.setBounds(250,0,75,25);
         viewForTab.setBackground(new Color(90, 90, 90));
         tabbedPane.addTab(tab3,viewForTab);
 
-
-
-
-    /*tabbedPane.setComponentAt(0,createForTab);
-    tabbedPane.setComponentAt(1,removeForTab);
-    tabbedPane.setComponentAt(2,viewForTab);*/
         mainPanel.add(tabbedPane);
-
 
     }
 
     protected JComponent createTab1() {
-        //createPanelTab1 = new JPanel();
+
         createPanelTab1.setLayout(null);
         createButtonTab1.setBounds(0, 250, 475, 25);
         createButtonTab1.addActionListener(this);
@@ -255,7 +224,6 @@ public abstract class AllFrames extends JFrame implements ActionListener {
             showUpdated();
 
         }
-
 
     }
 

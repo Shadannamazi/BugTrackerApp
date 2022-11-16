@@ -21,9 +21,6 @@ public class ProjectFrame extends AllFrames implements ActionListener {
 
 
     private static final String JSON_STORE = "./data/allProjects.json";
-    //private AllProjects allProjects = new AllProjects();
-    //private JsonWriter jsonWriter;
-    //private JsonReader jsonReader;
 
     protected JLabel bugName = new JLabel("Name");
     protected JLabel bugPublisher = new JLabel("Publisher");
@@ -55,31 +52,16 @@ public class ProjectFrame extends AllFrames implements ActionListener {
 
     public ProjectFrame(AllProjects allProjects,Project project) {
 
-
         super(project.getName(),"Bug", "Create New Bug", "Remove Bug", "View All Bugs");
 
         this.allProjects = allProjects;
-        int indexProj;
-        for (Project p : allProjects.getProjectArrayList()) {
-            if (p.getName().equals(project.getName()) && p.getCreator().equals(project.getCreator())) {
-                indexProj = allProjects.getProjectArrayList().indexOf(p);
-            }
-        }
+
         this.project = project;
-
-
-
-        //project = allProjects.getProjectArrayList().get(indexProj);
-        //this.projectName = project.getName();
-        //this.projectCreator = project.getCreator();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         bugSeverityLevelList.addActionListener(this);
 
-        //project = new Project(projectName,projectCreator);
-
     }
-
-
 
 
     @Override
@@ -94,17 +76,9 @@ public class ProjectFrame extends AllFrames implements ActionListener {
     }
 
 
-
     @Override
     public JComponent createTab1() {
         createPanelTab1 = super.createTab1();
-
-        //JButton createBugButton = new JButton("Create New Bug");
-        //JButton removeBugButton = new JButton("Remove Bug");
-
-        //createBugButton.setBounds(0, 250, 475, 25);
-        //createBugButton.addActionListener(this);
-        //createPanelTab1.add(createBugButton, BorderLayout.CENTER);
 
         fieldBugName = new JTextField();
         fieldBugPublisher = new JTextField();
@@ -118,11 +92,7 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         bugIsFixed = new JLabel("Fixed");
         bugSeverityLevel = new JLabel("Severity Level");
 
-        fieldBugName.setBounds(100,0,200,25);
-        fieldBugPublisher.setBounds(100,50,200,25);
-        fieldBugAssignee.setBounds(100,100,200,25);
-        checkBoxBugIsFixed.setBounds(100,150,200,25);
-        bugSeverityLevelList.setBounds(100,200,200,25);
+        setBoundsButtonsFields();
 
         createPanelTab1.add(fieldBugName);
         createPanelTab1.add(fieldBugPublisher);
@@ -130,23 +100,27 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         createPanelTab1.add(checkBoxBugIsFixed);
         createPanelTab1.add(bugSeverityLevelList);
 
-
-        bugName.setBounds(15,0,100,25);
-        bugPublisher.setBounds(15,50,100,25);
-        bugAssignee.setBounds(15,100,100,25);
-        bugIsFixed.setBounds(15,150,100,25);
-        bugSeverityLevel.setBounds(15,200,100,25);
-
         createPanelTab1.add(bugName);
         createPanelTab1.add(bugPublisher);
         createPanelTab1.add(bugAssignee);
         createPanelTab1.add(bugIsFixed);
         createPanelTab1.add(bugSeverityLevel);
 
-
-
         return createPanelTab1;
 
+    }
+
+    public void setBoundsButtonsFields() {
+        fieldBugName.setBounds(100,0,200,25);
+        fieldBugPublisher.setBounds(100,50,200,25);
+        fieldBugAssignee.setBounds(100,100,200,25);
+        checkBoxBugIsFixed.setBounds(100,150,200,25);
+        bugSeverityLevelList.setBounds(100,200,200,25);
+        bugName.setBounds(15,0,100,25);
+        bugPublisher.setBounds(15,50,100,25);
+        bugAssignee.setBounds(15,100,100,25);
+        bugIsFixed.setBounds(15,150,100,25);
+        bugSeverityLevel.setBounds(15,200,100,25);
     }
 
     @Override
@@ -194,13 +168,6 @@ public class ProjectFrame extends AllFrames implements ActionListener {
             viewAllPanel.remove(table);
         }
 
-        /*for (int i = 0; i < wasteButtonsCreate.size(); i++) {
-            table.removeRow(i + 1);
-
-        }*/
-        /*for (Object[] bug : wasteButtonsCreate) {
-            viewAllPanel.remove(button);
-        }*/
     }
 
 
@@ -213,6 +180,7 @@ public class ProjectFrame extends AllFrames implements ActionListener {
     }
 
     //https://stackoverflow.com/questions/20526917/load-arraylist-data-into-jtable
+    // EFFECTS: draws a table to store the bugs of the project
     public void drawBugTable(JComponent panel) {
         ArrayList<Bug> bugList = project.getBugArrayList();
 
@@ -250,7 +218,6 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         if (project != null) {
             if (project.getSizeBugList() > 0) {
 
-
                 ArrayList<Bug> bugList = project.getBugArrayList();
                 for (int i = 0; i < bugList.size(); i++) {
                     Bug bug = bugList.get(i);
@@ -259,7 +226,6 @@ public class ProjectFrame extends AllFrames implements ActionListener {
                             + "   Assignee: " + bug.getAssignee()
                             + "   Severity Level: " + bug.getSeverityLevel()
                             + "   Fixed: " + bug.isFixed());
-
 
                     projectButton.setBounds(0, i * 25 + 25, 475, 25);
                     projectButton.setHorizontalAlignment(SwingConstants.LEFT);
@@ -277,7 +243,6 @@ public class ProjectFrame extends AllFrames implements ActionListener {
             }
 
         }
-
 
     }
 
@@ -298,18 +263,14 @@ public class ProjectFrame extends AllFrames implements ActionListener {
 
                     Bug bug = bugList.get(i);
 
-
-                    Object[] bugRow = {i + 1, bug.getTitle(),bug.getPublisher(),bug.getAssignee(),bug.getSeverityLevel(),
-                            bug.isFixed()};
-
+                    Object[] bugRow = {i + 1, bug.getTitle(),bug.getPublisher(),bug.getAssignee(),
+                            bug.getSeverityLevel(), bug.isFixed()};
 
                     tableModel.addRow(bugRow);
-
 
                     this.revalidate();
                     this.repaint();
 
-                    //viewAllPanel.add(bugButton, BorderLayout.CENTER);
                     wasteButtonsCreate.add(bugRow);
                     this.revalidate();
                 }
@@ -333,25 +294,20 @@ public class ProjectFrame extends AllFrames implements ActionListener {
             Bug bug = new Bug(fieldBugName.getText(), fieldBugAssignee.getText(), fieldBugPublisher.getText(),
                     severityLevel);
             project.addBug(bug);
+            showUpdated();
 
         } else if (e.getSource() == removeButtonTab2) {
-            //System.out.println(allProjects.getNumberAllProjects());
-            //showUpdatedProjects();
+
             Bug removeBug = project.getBugArrayList().get(Integer.parseInt(fieldRemoveTab2.getText()) - 1);
 
             project.removeBug(removeBug);
-            //showUpdated();
-            //saveAllProjects();
-
-            //deleteProjectFromJson(removeProject);
-            //showUpdatedProjects();
-
+            showUpdated();
 
         } else if (e.getSource() == fixBugButton) {
 
 
             project.getBugArrayList().get(Integer.parseInt(fieldFixBug.getText()) - 1).fixBug();
-
+            showUpdated();
 
         } else if (e.getSource() == refreshButton) {
             showUpdated();
@@ -380,18 +336,7 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         showUpdated();
     }
 
-    /*
-    // MODIFIES: this
-    // EFFECTS: loads workroom from file
-    protected void loadAllProjects() {
-        try {
-            allProjects = jsonReader.read();
-            System.out.println("Loaded all projects from " + JSON_STORE);
-        } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
-        }
-        //viewAllProjects();
-    }*/
+
 
 
 

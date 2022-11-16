@@ -1,47 +1,64 @@
 {
-    "numOfAllProjects": 4,
+    "numOfAllProjects": 3,
     "All Projects": [
         {
             "bugArrayList": [
                 {
-                    "severityLevel": "LOW",
-                    "publisher": "fefweg",
-                    "fixed": true,
-                    "assignee": "wrgwrg",
-                    "title": "bug1"
-                },
-                {
-                    "severityLevel": "LOW",
-                    "publisher": "dsihfcuidh",
-                    "fixed": true,
-                    "assignee": "vv",
-                    "title": "helloooo"
+                    "severityLevel": "HIGH",
+                    "publisher": "shadi",
+                    "fixed": false,
+                    "assignee": "shadan",
+                    "title": "kousha"
                 },
                 {
                     "severityLevel": "HIGH",
                     "publisher": "shadi",
                     "fixed": false,
-                    "assignee": "george",
-                    "title": "make the comments"
+                    "assignee": "shadan",
+                    "title": "fix the remove bug panel"
+                },
+                {
+                    "severityLevel": "LOW",
+                    "publisher": "shadi",
+                    "fixed": false,
+                    "assignee": "kousha",
+                    "title": "fix the buttons"
                 }
             ],
-            "creator": "dcwecwe",
-            "name": "proj1"
+            "creator": "shadi",
+            "name": "proj 1"
+        },
+        {
+            "bugArrayList": [
+                {
+                    "severityLevel": "MEDIUM",
+                    "publisher": "shadi",
+                    "fixed": false,
+                    "assignee": "kousha",
+                    "title": "kousha"
+                },
+                {
+                    "severityLevel": "HIGH",
+                    "publisher": "shadi",
+                    "fixed": false,
+                    "assignee": "shadan",
+                    "title": "fix the bug image"
+                },
+                {
+                    "severityLevel": "HIGH",
+                    "publisher": "shadi",
+                    "fixed": false,
+                    "assignee": "shadan",
+                    "title": "fix the text colour"
+                }
+            ],
+            "creator": "kousha",
+            "name": "koushas project"
         },
         {
             "bugArrayList": [],
-            "creator": "creator 2",
-            "name": "proj 2"
-        },
-        {
-            "bugArrayList": [],
-            "creator": "creator 3",
-            "name": "proj 3"
-        },
-        {
-            "bugArrayList": [],
-            "creator": "creator 4",
-            "name": "proj 4"
+            "creator": "shadi",
+            "name": "shadis project"
         }
     ]
 }

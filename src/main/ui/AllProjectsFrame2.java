@@ -25,12 +25,8 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
     protected JsonWriter jsonWriter;
     protected JsonReader jsonReader;
 
-
-
-    ////////////////
     protected ProjectFrame newProjectFrame;
 
-    //////////
     ArrayList<JButton> wasteButtonsAllProjects = new ArrayList<>();
     ArrayList<JButton> wasteButtonsRemove = new ArrayList<>();
     protected JComponent viewAllProjectsPanel = new JPanel();
@@ -55,37 +51,23 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
     protected JLabel projectName = new JLabel("Name");
     protected JLabel projectCreator = new JLabel("Creator");
     protected JLabel removeProject = new JLabel("Select Project: ");
-    //protected JLabel selectProject = new JLabel("Select Project: ");
+
 
 
     public AllProjectsFrame2() {
 
-        //frame.setLayout(null);
         frame.setTitle("Bug Tracker Application");
         frame.setSize(WIDTH,HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.setResizable(false);
-
         frame.getContentPane().setBackground(COLOR);
-        //mainPanel.setLayout(new GridLayout(0,1));
-        //mainPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
         createButtonsForAllProjects();
 
-
-        //allProjects = new AllProjects();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
 
-
-        //createSaveAndLoad();
-
-        //test();
-
-
         viewAllProjectsPanel.setLayout(null);
         removeProjectPanel.setLayout(null);
-
 
         frame.setVisible(true);
         this.revalidate();
@@ -104,24 +86,14 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
 
         ImageIcon bugLogo = new ImageIcon(new ImageIcon("data/bugLogo.png").getImage().getScaledInstance(
                 100, 50, Image.SCALE_DEFAULT));
-        //selectProject.setForeground(Color.white);
+
         selectProject.setVerticalAlignment(JLabel.TOP);
         selectProject.setIcon(bugLogo);
         selectProject.setBounds(0,0,500,50);
 
-        saveActivityButton.setBounds(0, 50, 100, 50);
-        saveActivityButton.addActionListener(this);
-        frame.add(saveActivityButton, BorderLayout.CENTER);
-
-        loadProjectsButton.setBounds(0, 100, 100, 50);
-        loadProjectsButton.addActionListener(this);
-        frame.add(loadProjectsButton, BorderLayout.CENTER);
-
-
-        refreshAllProjectsButton.setBounds(0, 150, 100, 50);
-        refreshAllProjectsButton.addActionListener(this);
-        frame.add(refreshAllProjectsButton, BorderLayout.CENTER);
-
+        setSaveActivityButton();
+        setLoadProjectsButton();
+        setRefreshAllProjectsButton();
 
         frame.add(selectProject);
 
@@ -132,35 +104,44 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
 
     }
 
+    public void setSaveActivityButton() {
+        saveActivityButton.setBounds(0, 50, 100, 50);
+        saveActivityButton.addActionListener(this);
+        frame.add(saveActivityButton, BorderLayout.CENTER);
+    }
+
+    public void setLoadProjectsButton() {
+        loadProjectsButton.setBounds(0, 100, 100, 50);
+        loadProjectsButton.addActionListener(this);
+        frame.add(loadProjectsButton, BorderLayout.CENTER);
+    }
+
+    public void setRefreshAllProjectsButton() {
+        refreshAllProjectsButton.setBounds(0, 150, 100, 50);
+        refreshAllProjectsButton.addActionListener(this);
+        frame.add(refreshAllProjectsButton, BorderLayout.CENTER);
+    }
+
 
     public void createTabs() {
 
         JTabbedPane tabbedPane = new JTabbedPane();
-        //tabbedPane.setLayout(null);
         tabbedPane.setBackground(Color.DARK_GRAY);
 
         JComponent createProjectPanel = createNewProjectTab();
         createProjectPanel.setBackground(new Color(91, 89, 89));
-        //createProjectPanel.setBounds(50,0,75,25);
         tabbedPane.addTab("Create New Project",createProjectPanel);
-
 
 
         JComponent removeProjectPanel = removeAllProjects();
         removeProjectPanel.setBackground(new Color(91, 89, 89));
-        //removeProjectPanel.setBounds(150,0,75,25);
         tabbedPane.addTab("Remove Project",removeProjectPanel);
-
 
 
         this.revalidate();
         JComponent viewAllProjectsPanel = viewAllProjects();
-        //viewAllProjectsPanel.setBounds(250,0,75,25);
         viewAllProjectsPanel.setBackground(new Color(91, 89, 89));
         tabbedPane.addTab("View All Projects",viewAllProjectsPanel);
-
-
-
 
         tabbedPane.setComponentAt(0,createProjectPanel);
         tabbedPane.setComponentAt(1,removeProjectPanel);
@@ -170,7 +151,6 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
         this.revalidate();
         this.repaint();
 
-
     }
 
     public JComponent createNewProjectTab() {
@@ -179,8 +159,6 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
         createProjectButton.setBounds(0, 250, 475, 25);
         createProjectButton.addActionListener(this);
         createProjectPanel.add(createProjectButton, BorderLayout.CENTER);
-
-
 
         fieldProjectName.setBounds(150, 100, 200, 25);
         fieldProjectCreator.setBounds(150, 150, 200, 25);
@@ -206,7 +184,6 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
         this.revalidate();
         this.repaint();
 
-
         return viewAllProjectsPanel;
     }
 
@@ -221,16 +198,14 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
         removeProjectPanel.add(fieldRemoveProject,BorderLayout.CENTER);
         removeProject.setBounds(15, 475, 125, 25);
         removeProject.setForeground(Color.white);
-
         removeProjectPanel.add(removeProject);
+
         showUpdatedProjects();
         this.revalidate();
         this.repaint();
 
         return removeProjectPanel;
     }
-
-
 
 
     // EFFECTS: saves the workroom to file
@@ -263,6 +238,7 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
         if (e.getSource() == createProjectButton) {
             Project project = new Project(fieldProjectName.getText(), fieldProjectCreator.getText());
             allProjects.addProject(project);
+            showUpdatedProjects();
 
         } else if (e.getSource() == removeProjectButton) {
             System.out.println(allProjects.getNumberAllProjects());
@@ -272,9 +248,7 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
 
             allProjects.removeProject(removeProject);
             saveAllProjects();
-            //deleteProjectFromJson(removeProject);
-            //showUpdatedProjects();
-
+            showUpdatedProjects();
 
         } else if (e.getSource() == saveActivityButton) {
             saveAllProjects();
@@ -286,7 +260,6 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
             showUpdatedProjects();
 
         }
-
 
     }
 
@@ -321,7 +294,6 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
 
         if (allProjects.getNumberAllProjects() > 0) {
 
-
             ArrayList<Project> projectList = allProjects.getProjectArrayList();
             for (int i = 0; i < projectList.size(); i++) {
                 Project project = projectList.get(i);
@@ -337,21 +309,15 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
                 removeProjectPanel.add(projectButton, BorderLayout.CENTER);
                 wasteButtonsRemove.add(projectButton);
 
-
-                this.revalidate();
-                this.repaint();
+                refresh();
             }
-
         }
-
-
     }
 
+
     public void showUpdatedAllProjectsPanel() {
-        //System.out.println(allProjects.getNumberAllProjects());
 
         if (allProjects.getNumberAllProjects() > 0) {
-
 
             ArrayList<Project> projectList = allProjects.getProjectArrayList();
             for (int i = 0; i < projectList.size(); i++) {
@@ -368,30 +334,22 @@ public class AllProjectsFrame2 extends JFrame implements ActionListener {
                             if (project != null) {
                                 newProjectFrame = new ProjectFrame(allProjects,project);
                             }
-
                         }
                     }
                 });
 
-
-
                 viewAllProjectsPanel.add(projectButton, BorderLayout.CENTER);
                 wasteButtonsAllProjects.add(projectButton);
-
-                this.revalidate();
-                this.repaint();
+                refresh();
             }
 
         }
 
     }
 
-
-
-
-
-
-
-
+    public void refresh() {
+        this.revalidate();
+        this.repaint();
+    }
 
 }
