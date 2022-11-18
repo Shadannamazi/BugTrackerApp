@@ -14,6 +14,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+// citation: https://docs.oracle.com/javase/tutorial/uiswing/
+
+// Constructs AllFrames based on JFrame
 public abstract class AllFrames extends JFrame implements ActionListener {
 
     public static final int WIDTH = 600;
@@ -21,6 +24,8 @@ public abstract class AllFrames extends JFrame implements ActionListener {
     public static final Color COLOR = new Color(40, 40, 40);
 
     protected static final String JSON_STORE = "./data/allProjects.json";
+
+    //create all projects
     protected AllProjects allProjects = new AllProjects();
     protected JsonWriter jsonWriter;
     protected JsonReader jsonReader;
@@ -32,6 +37,7 @@ public abstract class AllFrames extends JFrame implements ActionListener {
     protected JComponent createPanelTab1 = new JPanel();
 
 
+    //create frame
     protected JFrame frame = new JFrame();
     protected JPanel mainPanel;
 
@@ -48,7 +54,9 @@ public abstract class AllFrames extends JFrame implements ActionListener {
     protected JLabel removeLabel;
 
 
-    //type: bug or project
+
+    //MODIFIES: this
+    //EFFECTS: constructs the allFrames with given type(bug or project) title and tab1, 2,3
     protected AllFrames(String title, String type,String tab1, String tab2, String tab3) {
 
         createButtonTab1 = new JButton("Create New " + type);
@@ -74,7 +82,10 @@ public abstract class AllFrames extends JFrame implements ActionListener {
     }
 
 
+    //MODIFIES: this
+    //EFFECTS: creates buttons for the frame with tab names
     protected void createButtonsForFrame(String tab1, String tab2, String tab3) {
+        //create new main panel
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.setBounds(100,0,500,575);
@@ -82,7 +93,7 @@ public abstract class AllFrames extends JFrame implements ActionListener {
         frame.add(mainPanel);
 
         JLabel selectProject = new JLabel();
-
+        //sets bug image
         ImageIcon bugLogo = new ImageIcon(new ImageIcon("data/bugLogo.png").getImage().getScaledInstance(
                 100, 50, Image.SCALE_DEFAULT));
 
@@ -103,24 +114,32 @@ public abstract class AllFrames extends JFrame implements ActionListener {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs save button
     protected void setSaveActivityButton() {
         saveActivityButton.setBounds(0, 50, 100, 50);
         saveActivityButton.addActionListener(this);
         frame.add(saveActivityButton, BorderLayout.CENTER);
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs load button
     protected void setLoadButton() {
         loadButton.setBounds(0, 100, 100, 50);
         loadButton.addActionListener(this);
         frame.add(loadButton, BorderLayout.CENTER);
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs refresh button
     protected void setRefreshButton() {
         refreshButton.setBounds(0, 150, 100, 50);
         refreshButton.addActionListener(this);
         frame.add(refreshButton, BorderLayout.CENTER);
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs tabs with title tab1,2,3
     protected void createTabs(String tab1, String tab2, String tab3) {
 
         JTabbedPane tabbedPane = new JTabbedPane();
@@ -144,6 +163,8 @@ public abstract class AllFrames extends JFrame implements ActionListener {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs tab1
     protected JComponent createTab1() {
 
         createPanelTab1.setLayout(null);
@@ -159,6 +180,8 @@ public abstract class AllFrames extends JFrame implements ActionListener {
 
 
 
+    //MODIFIES: this
+    //EFFECTS: constructs tab2
     protected JComponent createTab2() {
 
         removeButtonTab2.setBounds(0, 500, 475, 25);
@@ -176,6 +199,8 @@ public abstract class AllFrames extends JFrame implements ActionListener {
         return removePanel;
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs tab3
     protected JComponent createTab3() {
 
         showUpdated();
@@ -185,9 +210,11 @@ public abstract class AllFrames extends JFrame implements ActionListener {
         return viewAllPanel;
     }
 
+    //MODIFIES: this
+    //EFFECTS: shows updated panels
     public abstract void showUpdated();
 
-    // EFFECTS: saves the workroom to file
+
     protected void saveAllProjects() {
         try {
             jsonWriter.open();
@@ -212,6 +239,8 @@ public abstract class AllFrames extends JFrame implements ActionListener {
         showUpdated();
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets the action listeners to save, load and refresh the projects
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveActivityButton) {

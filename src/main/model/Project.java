@@ -54,7 +54,6 @@ public class Project implements Writable {
     }
 
 
-
     //EFFECTS: converts project to Json
     @Override
     public JSONObject toJson() {

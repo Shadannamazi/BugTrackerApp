@@ -49,6 +49,7 @@ public class ProjectFrame extends AllFrames implements ActionListener {
     protected DefaultTableModel tableModel;
     protected JTable table;
 
+    // Constructs each project frame based on JFrame by calling its super with bug type and tab names
     public ProjectFrame(AllProjects allProjects,Project project) {
 
         super(project.getName(),"Bug", "Create New Bug", "Remove Bug", "View All Bugs");
@@ -63,6 +64,8 @@ public class ProjectFrame extends AllFrames implements ActionListener {
     }
 
 
+    //MODIFIES: this
+    //EFFECTS: shows updated bug panels
     @Override
     public void showUpdated() {
         resetViewAllBugs();
@@ -75,6 +78,8 @@ public class ProjectFrame extends AllFrames implements ActionListener {
     }
 
 
+    //MODIFIES: this
+    //EFFECTS: constructs new tab1
     @Override
     public JComponent createTab1() {
         createPanelTab1 = super.createTab1();
@@ -109,6 +114,8 @@ public class ProjectFrame extends AllFrames implements ActionListener {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets the bounds of the buttons in the frame
     public void setBoundsButtonsFields() {
         fieldBugName.setBounds(100,0,200,25);
         fieldBugPublisher.setBounds(100,50,200,25);
@@ -122,6 +129,8 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         bugSeverityLevel.setBounds(15,200,100,25);
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs new tab2
     @Override
     public JComponent createTab2() {
         removePanel = super.createTab2();
@@ -134,6 +143,8 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         return removePanel;
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs new tab3
     @Override
     public JComponent createTab3() {
         viewAllPanel = super.createTab3();
@@ -156,10 +167,6 @@ public class ProjectFrame extends AllFrames implements ActionListener {
     }
 
 
-
-
-
-
     // MODIFIES: this
     // EFFECTS: resets view projects
     public void resetViewAllBugs() {
@@ -179,6 +186,7 @@ public class ProjectFrame extends AllFrames implements ActionListener {
     }
 
     //https://stackoverflow.com/questions/20526917/load-arraylist-data-into-jtable
+    ////MODIFIES: this
     // EFFECTS: draws a table to store the bugs of the project
     public void drawBugTable(JComponent panel) {
         ArrayList<Bug> bugList = project.getBugArrayList();
@@ -202,16 +210,14 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         table.getColumnModel().getColumn(0).setPreferredWidth(5);
         table.getColumnModel().getColumn(5).setPreferredWidth(5);
 
-
         tableModel.addRow(columnNames);
 
         panel.add(table);
 
-
-
     }
 
-
+    //MODIFIES: this
+    //EFFECTS: shows updated remove bugs panel
     public void showUpdatedRemoveBugPanel() {
 
         if (project != null) {
@@ -246,8 +252,8 @@ public class ProjectFrame extends AllFrames implements ActionListener {
     }
 
 
-
-
+    //MODIFIES: this
+    //EFFECTS: shows updated all bugs panel
     public void showUpdatedAllBugsPanel() {
 
 
@@ -280,11 +286,14 @@ public class ProjectFrame extends AllFrames implements ActionListener {
     }
 
 
+    //MODIFIES: this
+    //EFFECTS: sets the action listeners for create button in tab1, remove button in tab2, fix button in tab3
+    // save, load and refresh the bugs
     @Override
     public void actionPerformed(ActionEvent e) {
         //project = new Project(projectName,projectCreator);
         if (e.getSource() == createButtonTab1) {
-            BugSeverityLevel severityLevel = BugSeverityLevel.LOW;
+            BugSeverityLevel severityLevel;
 
 
             severityLevel = (BugSeverityLevel) bugSeverityLevelList.getSelectedItem();
@@ -322,6 +331,7 @@ public class ProjectFrame extends AllFrames implements ActionListener {
 
     }
 
+    //MODIFIES: this
     // EFFECTS: saves the workroom to file
     protected void saveAllProjects() {
         try {
@@ -334,8 +344,6 @@ public class ProjectFrame extends AllFrames implements ActionListener {
         }
         showUpdated();
     }
-
-
 
 
 

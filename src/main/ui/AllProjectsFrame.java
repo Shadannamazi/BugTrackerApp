@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+// Constructs AllProjectsFrame based on JFrame
 public class AllProjectsFrame extends JFrame implements ActionListener {
 
     public static final int WIDTH = 600;
@@ -32,8 +33,7 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
     protected JComponent viewAllProjectsPanel = new JPanel();
     protected JComponent removeProjectPanel = new JPanel();
 
-
-
+    // constructs new frame in jframe
     protected JFrame frame = new JFrame();
     protected JPanel mainPanel;
     protected JTextField fieldProjectName = new JTextField();
@@ -54,6 +54,8 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
 
 
 
+    //MODIFIES: this
+    //EFFECTS: constructs the allFrames
     public AllProjectsFrame() {
 
         frame.setTitle("Bug Tracker Application");
@@ -74,7 +76,8 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
         this.repaint();
     }
 
-
+    //MODIFIES: this
+    //EFFECTS: creates buttons for the all projects frame
     public void createButtonsForAllProjects() {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
@@ -84,6 +87,7 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
 
         JLabel selectProject = new JLabel();
 
+        //sets bug image
         ImageIcon bugLogo = new ImageIcon(new ImageIcon("data/bugLogo.png").getImage().getScaledInstance(
                 100, 50, Image.SCALE_DEFAULT));
 
@@ -104,18 +108,24 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs save button
     public void setSaveActivityButton() {
         saveActivityButton.setBounds(0, 50, 100, 50);
         saveActivityButton.addActionListener(this);
         frame.add(saveActivityButton, BorderLayout.CENTER);
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs load button
     public void setLoadProjectsButton() {
         loadProjectsButton.setBounds(0, 100, 100, 50);
         loadProjectsButton.addActionListener(this);
         frame.add(loadProjectsButton, BorderLayout.CENTER);
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs refresh button
     public void setRefreshAllProjectsButton() {
         refreshAllProjectsButton.setBounds(0, 150, 100, 50);
         refreshAllProjectsButton.addActionListener(this);
@@ -123,6 +133,8 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
     }
 
 
+    //MODIFIES: this
+    //EFFECTS: constructs tabs
     public void createTabs() {
 
         JTabbedPane tabbedPane = new JTabbedPane();
@@ -153,6 +165,8 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs new projects tab
     public JComponent createNewProjectTab() {
         JComponent createProjectPanel = new JPanel();
         createProjectPanel.setLayout(null);
@@ -178,6 +192,8 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
         return createProjectPanel;
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs view all projects tab
     public JComponent viewAllProjects() {
 
         showUpdatedProjects();
@@ -187,6 +203,8 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
         return viewAllProjectsPanel;
     }
 
+    //MODIFIES: this
+    //EFFECTS: constructs remove projects tab
     public JComponent removeAllProjects() {
 
         removeProjectButton.setBounds(0, 500, 475, 25);
@@ -208,6 +226,7 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
     }
 
 
+    //MODIFIES: this
     // EFFECTS: saves the workroom to file
     private void saveAllProjects() {
         try {
@@ -233,6 +252,9 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
         showUpdatedProjects();
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets the action listeners for create project button, remove project button and
+    // save, load and refresh the projects
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == createProjectButton) {
@@ -263,6 +285,8 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: shows updated project panels
     public void showUpdatedProjects() {
         resetViewAllProjects();
         resetRemoveProjects();
@@ -290,6 +314,8 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: shows updated remove project panel
     public void showUpdatedRemoveProjectPanel() {
 
         if (allProjects.getNumberAllProjects() > 0) {
@@ -315,6 +341,8 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
     }
 
 
+    //MODIFIES: this
+    //EFFECTS: shows updated all project panel
     public void showUpdatedAllProjectsPanel() {
 
         if (allProjects.getNumberAllProjects() > 0) {
@@ -347,6 +375,8 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: refreshes this panel/frame
     public void refresh() {
         this.revalidate();
         this.repaint();
