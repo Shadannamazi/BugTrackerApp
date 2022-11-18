@@ -13,6 +13,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+// citation: https://docs.oracle.com/javase/tutorial/uiswing/
+// https://www.youtube.com/watch?v=Kmgo00avvEw&t=2811s
+
 // Constructs AllProjectsFrame based on JFrame
 public class AllProjectsFrame extends JFrame implements ActionListener {
 
@@ -33,7 +36,7 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
     protected JComponent viewAllProjectsPanel = new JPanel();
     protected JComponent removeProjectPanel = new JPanel();
 
-    // constructs new frame in jframe
+    // constructs new frame in JFrame
     protected JFrame frame = new JFrame();
     protected JPanel mainPanel;
     protected JTextField fieldProjectName = new JTextField();
@@ -72,6 +75,7 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
         removeProjectPanel.setLayout(null);
 
         frame.setVisible(true);
+        frame.setResizable(false);
         this.revalidate();
         this.repaint();
     }

@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 // citation: https://docs.oracle.com/javase/tutorial/uiswing/
+// https://www.youtube.com/watch?v=Kmgo00avvEw&t=2811s
 
 // Constructs AllFrames based on JFrame
 public abstract class AllFrames extends JFrame implements ActionListener {
@@ -65,6 +66,7 @@ public abstract class AllFrames extends JFrame implements ActionListener {
 
         frame.setTitle(title);
         frame.setSize(WIDTH,HEIGHT);
+        frame.setResizable(false);
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(COLOR);
 

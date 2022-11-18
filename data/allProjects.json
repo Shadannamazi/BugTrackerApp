@@ -1,64 +1,161 @@
 {
-    "numOfAllProjects": 3,
+    "numOfAllProjects": 5,
     "All Projects": [
         {
             "bugArrayList": [
                 {
                     "severityLevel": "HIGH",
                     "publisher": "shadi",
-                    "fixed": false,
-                    "assignee": "shadan",
-                    "title": "kousha"
+                    "fixed": true,
+                    "assignee": "jake",
+                    "title": "fix the text colour "
                 },
                 {
-                    "severityLevel": "HIGH",
+                    "severityLevel": "MEDIUM",
                     "publisher": "shadi",
-                    "fixed": false,
-                    "assignee": "shadan",
-                    "title": "fix the remove bug panel"
+                    "fixed": true,
+                    "assignee": "mark",
+                    "title": "check the remove panel "
                 },
                 {
                     "severityLevel": "LOW",
                     "publisher": "shadi",
                     "fixed": false,
-                    "assignee": "kousha",
-                    "title": "fix the buttons"
+                    "assignee": "nora",
+                    "title": "fix the logo "
+                },
+                {
+                    "severityLevel": "MEDIUM",
+                    "publisher": "shadan",
+                    "fixed": false,
+                    "assignee": "billy",
+                    "title": "random bug"
                 }
             ],
-            "creator": "shadi",
-            "name": "proj 1"
+            "creator": "shadan ",
+            "name": "shadi's project "
         },
         {
             "bugArrayList": [
                 {
                     "severityLevel": "MEDIUM",
-                    "publisher": "shadi",
+                    "publisher": "sarah",
+                    "fixed": false,
+                    "assignee": "shadan ",
+                    "title": "sarah's bug 1"
+                },
+                {
+                    "severityLevel": "LOW",
+                    "publisher": "sarah",
+                    "fixed": true,
+                    "assignee": "kousha",
+                    "title": "fix the colour "
+                },
+                {
+                    "severityLevel": "LOW",
+                    "publisher": "sarah",
                     "fixed": false,
                     "assignee": "kousha",
-                    "title": "kousha"
+                    "title": "bug 2"
                 },
                 {
                     "severityLevel": "HIGH",
-                    "publisher": "shadi",
+                    "publisher": "sarah",
                     "fixed": false,
-                    "assignee": "shadan",
-                    "title": "fix the bug image"
+                    "assignee": "mark ",
+                    "title": "bug 3"
                 },
                 {
-                    "severityLevel": "HIGH",
-                    "publisher": "shadi",
-                    "fixed": false,
-                    "assignee": "shadan",
-                    "title": "fix the text colour"
+                    "severityLevel": "MEDIUM",
+                    "publisher": "sarah",
+                    "fixed": true,
+                    "assignee": "shadi",
+                    "title": "bug 4"
                 }
             ],
-            "creator": "kousha",
-            "name": "koushas project"
+            "creator": "sarah ",
+            "name": "sarah's proj"
         },
         {
-            "bugArrayList": [],
-            "creator": "shadi",
-            "name": "shadis project"
+            "bugArrayList": [
+                {
+                    "severityLevel": "MEDIUM",
+                    "publisher": "kousha",
+                    "fixed": false,
+                    "assignee": "shadi",
+                    "title": "make a user login"
+                },
+                {
+                    "severityLevel": "MEDIUM",
+                    "publisher": "kousha",
+                    "fixed": false,
+                    "assignee": "shadan",
+                    "title": "make a register page"
+                },
+                {
+                    "severityLevel": "LOW",
+                    "publisher": "kousha",
+                    "fixed": false,
+                    "assignee": "sarah",
+                    "title": "random bug"
+                }
+            ],
+            "creator": "koushi",
+            "name": "kousha's project 2"
+        },
+        {
+            "bugArrayList": [
+                {
+                    "severityLevel": "HIGH",
+                    "publisher": "sahel",
+                    "fixed": false,
+                    "assignee": "shadi",
+                    "title": "main project bug"
+                },
+                {
+                    "severityLevel": "HIGH",
+                    "publisher": "ava",
+                    "fixed": true,
+                    "assignee": "shadan",
+                    "title": "make frame not resizable "
+                },
+                {
+                    "severityLevel": "LOW",
+                    "publisher": "jacob",
+                    "fixed": true,
+                    "assignee": "shadan",
+                    "title": "change the colour"
+                }
+            ],
+            "creator": "kelly",
+            "name": "main project"
+        },
+        {
+            "bugArrayList": [
+                {
+                    "severityLevel": "HIGH",
+                    "publisher": "sahel ",
+                    "fixed": true,
+                    "assignee": "shadan ",
+                    "title": "fix the frame of the app "
+                },
+                {
+                    "severityLevel": "LOW",
+                    "publisher": "sahel ",
+                    "fixed": false,
+                    "assignee": "kousha ",
+                    "title": "fix the colour "
+                },
+                {
+                    "severityLevel": "MEDIUM",
+                    "publisher": "sahel ",
+                    "fixed": false,
+                    "assignee": "ali ",
+                    "title": "get new image "
+                }
+            ],
+            "creator": "sahel ",
+            "name": "sahel's project "
         }
     ]
 }
