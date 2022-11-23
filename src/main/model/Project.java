@@ -40,12 +40,16 @@ public class Project implements Writable {
     //MODIFIES: this
     public void addBug(Bug bug) {
         bugArrayList.add(bug);
+        EventLog.getInstance().logEvent(new Event("Added bug: " + bug.getTitle()
+                + " to all bugs"));
     }
 
     //EFFECTS: adds bug to arraylist of bugs
     //MODIFIES: this
     public void removeBug(Bug bug) {
         bugArrayList.remove(bug);
+        EventLog.getInstance().logEvent(new Event("Removed bug: " + bug.getTitle()
+                + " from all bugs"));
     }
 
     //EFFECTS: returns number of bugs in project

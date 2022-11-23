@@ -1,9 +1,7 @@
 package ui;
 
-import model.AllProjects;
-import model.Bug;
-import model.BugSeverityLevel;
-import model.Project;
+import model.*;
+import model.Event;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -14,6 +12,8 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 // https://www.youtube.com/watch?v=Kmgo00avvEw&t=2811s
 
 // Constructs ProjectFrame based on JFrame
-public class ProjectFrame extends AllFrames implements ActionListener {
+public class ProjectFrame extends AllFrames implements ActionListener, WindowListener {
 
     private static final String JSON_STORE = "./data/allProjects.json";
 
@@ -356,6 +356,42 @@ public class ProjectFrame extends AllFrames implements ActionListener {
     }
 
 
+    @Override
+    public void windowOpened(WindowEvent e) {
 
+    }
 
+    //EFFECTS: Action when window is closing
+    @Override
+    public void windowClosing(WindowEvent e) {
+        for (Event ev: EventLog.getInstance()) {
+            System.out.println(ev.toString());
+        }
+    }
+
+    //EFFECTS: Action when window closed
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
+    }
 }

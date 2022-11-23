@@ -2,6 +2,8 @@ package ui;
 
 
 import model.AllProjects;
+import model.Event;
+import model.EventLog;
 import model.Project;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -10,6 +12,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +22,7 @@ import java.util.ArrayList;
 // https://www.youtube.com/watch?v=Kmgo00avvEw&t=2811s
 
 // Constructs AllFrames based on JFrame
-public abstract class AllFrames extends JFrame implements ActionListener {
+public abstract class AllFrames extends JFrame implements ActionListener, WindowListener {
 
     public static final int WIDTH = 600;
     public static final int HEIGHT = 600;
@@ -259,20 +263,19 @@ public abstract class AllFrames extends JFrame implements ActionListener {
     }
 
 
+    //EFFECTS: Action when window is closing
+    @Override
+    public void windowClosing(WindowEvent e) {
+        for (Event ev: EventLog.getInstance()) {
+            System.out.println(ev.toString());
+        }
+    }
 
+    //EFFECTS: Action when window closed
+    @Override
+    public void windowClosed(WindowEvent e) {
 
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 }

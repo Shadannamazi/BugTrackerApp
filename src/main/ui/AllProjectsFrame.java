@@ -1,6 +1,8 @@
 package ui;
 
 import model.AllProjects;
+import model.Event;
+import model.EventLog;
 import model.Project;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -9,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +21,7 @@ import java.util.ArrayList;
 // https://www.youtube.com/watch?v=Kmgo00avvEw&t=2811s
 
 // Constructs AllProjectsFrame based on JFrame
-public class AllProjectsFrame extends JFrame implements ActionListener {
+public class AllProjectsFrame extends JFrame implements ActionListener, WindowListener {
 
     public static final int WIDTH = 600;
     public static final int HEIGHT = 600;
@@ -63,8 +67,21 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
 
         frame.setTitle("Bug Tracker Application");
         frame.setSize(WIDTH,HEIGHT);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //https://stackoverflow.com/questions/60516720/java-how-to-print-message-when-a-jframe-is-closed
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                //System.out.println("GUI has been closed");
+                for (Event ev: EventLog.getInstance()) {
+                    System.out.println(ev.toString());
+                }
+                System.exit(0);
+            }
+        });
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(COLOR);
+
 
         createButtonsForAllProjects();
 
@@ -384,6 +401,45 @@ public class AllProjectsFrame extends JFrame implements ActionListener {
     public void refresh() {
         this.revalidate();
         this.repaint();
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    //EFFECTS: Action when window is closing
+    @Override
+    public void windowClosing(WindowEvent e) {
+        for (Event ev: EventLog.getInstance()) {
+            System.out.println(ev.toString());
+        }
+    }
+
+    //EFFECTS: Action when window closed
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 
 }

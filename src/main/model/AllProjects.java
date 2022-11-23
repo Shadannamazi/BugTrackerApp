@@ -22,6 +22,8 @@ public class AllProjects implements Writable {
     //MODIFIES: this
     public void addProject(Project project) {
         projectArrayList.add(project);
+        EventLog.getInstance().logEvent(new Event("Added project: " + project.getName()
+                + " to all projects"));
     }
 
     //EFFECTS: removes project from arraylist of projects
@@ -30,6 +32,8 @@ public class AllProjects implements Writable {
         if (projectArrayList.contains(project)) {
             projectArrayList.remove(project);
         }
+        EventLog.getInstance().logEvent(new Event("Removed project: " + project.getName()
+                + " from all projects"));
     }
 
     ////EFFECTS: returns number of projects in allProjects
@@ -43,6 +47,7 @@ public class AllProjects implements Writable {
         JSONObject json = new JSONObject();
         json.put("numOfAllProjects", getNumberAllProjects());
         json.put("All Projects", allProjectsToJson());
+        EventLog.getInstance().logEvent(new Event("Saved all projects"));
         return json;
     }
 

@@ -51,6 +51,7 @@ public class Bug implements Writable {
     //MODIFIES: this
     public void fixBug() {
         this.isFixed = true;
+        EventLog.getInstance().logEvent(new Event("Fixed bug: " + this.getTitle()));
     }
 
     //EFFECTS: converts bug to Json

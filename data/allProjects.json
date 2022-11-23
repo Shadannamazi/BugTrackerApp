@@ -91,44 +91,10 @@
                     "fixed": false,
                     "assignee": "shadan",
                     "title": "make a register page"
-                },
-                {
-                    "severityLevel": "LOW",
-                    "publisher": "kousha",
-                    "fixed": false,
-                    "assignee": "sarah",
-                    "title": "random bug"
                 }
             ],
             "creator": "koushi",
             "name": "kousha's project 2"
-        },
-        {
-            "bugArrayList": [
-                {
-                    "severityLevel": "HIGH",
-                    "publisher": "sahel",
-                    "fixed": false,
-                    "assignee": "shadi",
-                    "title": "main project bug"
-                },
-                {
-                    "severityLevel": "HIGH",
-                    "publisher": "ava",
-                    "fixed": true,
-                    "assignee": "shadan",
-                    "title": "make frame not resizable "
-                },
-                {
-                    "severityLevel": "LOW",
-                    "publisher": "jacob",
-                    "fixed": true,
-                    "assignee": "shadan",
-                    "title": "change the colour"
-                }
-            ],
-            "creator": "kelly",
-            "name": "main project"
         },
         {
             "bugArrayList": [
@@ -156,6 +122,11 @@
             ],
             "creator": "sahel ",
             "name": "sahel's project "
+        },
+        {
+            "bugArrayList": [],
+            "creator": "shadi",
+            "name": "new proj"
         }
     ]
 }
