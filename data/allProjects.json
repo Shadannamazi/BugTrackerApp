@@ -1,5 +1,5 @@
 {
-    "numOfAllProjects": 5,
+    "numOfAllProjects": 6,
     "All Projects": [
         {
             "bugArrayList": [
@@ -115,7 +115,7 @@
                 {
                     "severityLevel": "MEDIUM",
                     "publisher": "sahel ",
-                    "fixed": false,
+                    "fixed": true,
                     "assignee": "ali ",
                     "title": "get new image "
                 }
@@ -127,6 +127,26 @@
             "bugArrayList": [],
             "creator": "shadi",
             "name": "new proj"
+        },
+        {
+            "bugArrayList": [
+                {
+                    "severityLevel": "MEDIUM",
+                    "publisher": "sima",
+                    "fixed": true,
+                    "assignee": "parniyan",
+                    "title": "create new tab"
+                },
+                {
+                    "severityLevel": "LOW",
+                    "publisher": "sima",
+                    "fixed": false,
+                    "assignee": "makan",
+                    "title": "random bug"
+                }
+            ],
+            "creator": "sima",
+            "name": "simas project"
         }
     ]
 }
