@@ -226,7 +226,7 @@ public abstract class AllFrames extends JFrame implements ActionListener, Window
             jsonWriter.open();
             jsonWriter.writeAllProjects(allProjects);
             jsonWriter.close();
-            System.out.println("Saved all projects to " + JSON_STORE);
+            //System.out.println("Saved all projects to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -238,7 +238,8 @@ public abstract class AllFrames extends JFrame implements ActionListener, Window
     protected void loadAllProjects() {
         try {
             allProjects = jsonReader.read();
-            System.out.println("Loaded all projects from " + JSON_STORE);
+
+            //System.out.println("Loaded all projects from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }

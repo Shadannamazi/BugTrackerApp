@@ -3,9 +3,7 @@ package persistence;
 // This class has been created with help of JsonWriter Class in JsonSerializationDemo
 //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/master/src/main/persistence/JsonWriter.java
 
-import model.AllProjects;
-import model.Project;
-import model.Bug;
+import model.*;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -35,6 +33,7 @@ public class JsonWriter {
     public void writeAllProjects(AllProjects allProjects) {
         JSONObject json = allProjects.toJson();
         saveToFile(json.toString(TAB));
+        EventLog.getInstance().logEvent(new Event("Saved all projects"));
 
     }
 

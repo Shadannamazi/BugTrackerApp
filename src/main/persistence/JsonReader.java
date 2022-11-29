@@ -3,10 +3,7 @@ package persistence;
 // This class has been created with help of JsonReader Class in JsonSerializationDemo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/master/src/main/persistence/JsonReader.java
 
-import model.AllProjects;
-import model.Bug;
-import model.BugSeverityLevel;
-import model.Project;
+import model.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -32,6 +29,7 @@ public class JsonReader {
     public AllProjects read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
+        EventLog.getInstance().logEvent(new Event("Loaded all projects"));
         return parseAllProjects(jsonObject);
     }
 

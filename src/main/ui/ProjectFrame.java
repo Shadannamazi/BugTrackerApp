@@ -283,11 +283,9 @@ public class ProjectFrame extends AllFrames implements ActionListener, WindowLis
 
                     tableModel.addRow(bugRow);
 
-                    this.revalidate();
-                    this.repaint();
-
                     wasteButtonsCreate.add(bugRow);
                     this.revalidate();
+                    this.repaint();
                 }
 
             }
@@ -348,7 +346,7 @@ public class ProjectFrame extends AllFrames implements ActionListener, WindowLis
             jsonWriter.open();
             jsonWriter.writeAllProjects(allProjects);
             jsonWriter.close();
-            System.out.println("Saved all projects to " + JSON_STORE);
+            //System.out.println("Saved all projects to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }

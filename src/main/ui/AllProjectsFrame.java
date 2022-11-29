@@ -254,7 +254,7 @@ public class AllProjectsFrame extends JFrame implements ActionListener, WindowLi
             jsonWriter.open();
             jsonWriter.writeAllProjects(allProjects);
             jsonWriter.close();
-            System.out.println("Saved all projects to " + JSON_STORE);
+            //System.out.println("Saved all projects to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -266,7 +266,7 @@ public class AllProjectsFrame extends JFrame implements ActionListener, WindowLi
     private void loadAllProjects() {
         try {
             allProjects = jsonReader.read();
-            System.out.println("Loaded all projects from " + JSON_STORE);
+            //System.out.println("Loaded all projects from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
@@ -284,13 +284,12 @@ public class AllProjectsFrame extends JFrame implements ActionListener, WindowLi
             showUpdatedProjects();
 
         } else if (e.getSource() == removeProjectButton) {
-            System.out.println(allProjects.getNumberAllProjects());
             //showUpdatedProjects();
             Project removeProject = allProjects.getProjectArrayList().get(Integer.parseInt(fieldRemoveProject.getText())
                     - 1);
 
             allProjects.removeProject(removeProject);
-            saveAllProjects();
+            //saveAllProjects();
             showUpdatedProjects();
 
         } else if (e.getSource() == saveActivityButton) {
