@@ -47,7 +47,6 @@ public class AllProjects implements Writable {
         JSONObject json = new JSONObject();
         json.put("numOfAllProjects", getNumberAllProjects());
         json.put("All Projects", allProjectsToJson());
-        //EventLog.getInstance().logEvent(new Event("Saved all projects"));
         return json;
     }
 

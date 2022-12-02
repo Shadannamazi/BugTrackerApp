@@ -3,6 +3,10 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -13,6 +17,8 @@ class AllProjectsTest {
     private Project project2;
     private Project project3;
     private Project project4;
+    //private EventLog eventLog;
+
 
     @BeforeEach
     public void runBefore() {
@@ -21,6 +27,9 @@ class AllProjectsTest {
         project2 = new Project("pro2", "creator2");
         project3 = new Project("pro3", "creator3");
         project4 = new Project("pro4", "creator4");
+        EventLog.getInstance().clear();
+
+
     }
 
     @Test
@@ -33,6 +42,9 @@ class AllProjectsTest {
         allProjectsTest.addProject(project1);
         assertEquals(1,allProjectsTest.getNumberAllProjects());
         assertEquals(project1,allProjectsTest.getProjectArrayList().get(0));
+
+
+
     }
 
     @Test
@@ -47,6 +59,8 @@ class AllProjectsTest {
         assertEquals(project2,allProjectsTest.getProjectArrayList().get(1));
         assertEquals(project3,allProjectsTest.getProjectArrayList().get(2));
         assertEquals(project4,allProjectsTest.getProjectArrayList().get(3));
+
+
 
     }
 
@@ -112,4 +126,42 @@ class AllProjectsTest {
         assertEquals(2,allProjectsTest.getProjectArrayList().size());
 
     }
+
+    @Test
+    public void testEventLogForAllProjects() {
+        allProjectsTest.addProject(project1);
+        allProjectsTest.addProject(project2);
+        allProjectsTest.addProject(project3);
+        allProjectsTest.addProject(project4);
+
+        allProjectsTest.removeProject(project1);
+        allProjectsTest.removeProject(project2);
+
+        List<String> eventList = new ArrayList<>();
+        for (Event e : EventLog.getInstance()) {
+            eventList.add(e.getDescription());
+
+        }
+
+        assertEquals("Event log cleared.", eventList.get(0));
+
+        assertEquals(("Added project: " + project1.getName()
+                + " to all projects"), eventList.get(1));
+        assertEquals(("Added project: " + project2.getName()
+                + " to all projects"), eventList.get(2));
+        assertEquals(("Added project: " + project3.getName()
+                + " to all projects"), eventList.get(3));
+        assertEquals(("Added project: " + project4.getName()
+                + " to all projects"), eventList.get(4));
+
+        assertEquals(("Removed project: " + project1.getName()
+                + " from all projects"), eventList.get(5));
+        assertEquals(("Removed project: " + project2.getName()
+                + " from all projects"), eventList.get(6));
+
+        assertEquals(7,eventList.size());
+
+    }
+
+
 }

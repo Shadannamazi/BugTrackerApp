@@ -3,6 +3,9 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BugTest {
@@ -18,7 +21,7 @@ public class BugTest {
         bug2 = new Bug("bug2", "assignee2", "pub2", BugSeverityLevel.MEDIUM);
         bug3 = new Bug("bug3", "assignee3", "pub3", BugSeverityLevel.HIGH);
         bug4 = new Bug("bug4", "assignee4", "pub4", BugSeverityLevel.LOW);
-
+        EventLog.getInstance().clear();
     }
 
     @Test
@@ -62,6 +65,31 @@ public class BugTest {
 
         bug4.fixBug();
         assertTrue(bug4.isFixed());
+
+    }
+
+    @Test
+    public void testEventLogForBug() {
+
+        bug1.fixBug();
+        bug2.fixBug();
+        bug3.fixBug();
+
+        List<String> eventList = new ArrayList<>();
+        for (Event e : EventLog.getInstance()) {
+            eventList.add(e.getDescription());
+
+        }
+
+        assertEquals("Event log cleared.", eventList.get(0));
+
+        assertEquals(("Fixed bug: " + bug1.getTitle()), eventList.get(1));
+        assertEquals(("Fixed bug: " + bug2.getTitle()), eventList.get(2));
+        assertEquals(("Fixed bug: " + bug3.getTitle()), eventList.get(3));
+
+
+
+        assertEquals(4,eventList.size());
 
     }
 
