@@ -49,7 +49,7 @@ Some *features* of this application can include:
 - As a user, when I start the application, I want to be given the option to load 
 my projects along with its bugs from file
 
-#EventLog
+# EventLog 
 
 Mon Nov 28 14:52:06 PST 2022
 Loaded all projects
