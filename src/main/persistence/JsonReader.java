@@ -1,7 +1,7 @@
 package persistence;
 
 // This class has been created with help of JsonReader Class in JsonSerializationDemo
-// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/master/src/main/persistence/JsonReader.java
+// https://github.students.cs.ubc.ca/Project210/JsonSerializationDemo/blob/master/src/main/persistence/JsonReader.java
 
 import model.*;
 import org.json.JSONArray;

@@ -1,7 +1,7 @@
 package persistence;
 
 //// This class has been created with help of Writable interface in JsonSerializationDemo
-//https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/master/src/main/persistence/Writable.java
+//https://github.students.cs.ubc.ca/Project/JsonSerializationDemo/blob/master/src/main/persistence/Writable.java
 
 import org.json.JSONObject;
 

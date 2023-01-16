@@ -1,7 +1,7 @@
 package persistence;
 
 //// This class has been created with help of JsonReader Class in JsonSerializationDemo
-//https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/master/src/test/persistence/JsonReaderTest.java
+//https://github.students.cs.ubc.ca/Project/JsonSerializationDemo/blob/master/src/test/persistence/JsonReaderTest.java
 
 import model.AllProjects;
 import model.BugSeverityLevel;

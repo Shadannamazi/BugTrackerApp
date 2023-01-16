@@ -1,7 +1,7 @@
 package persistence;
 
 // This class has been created with help of JsonWriter Class in JsonSerializationDemo
-//https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/master/src/main/persistence/JsonWriter.java
+//https://github.students.cs.ubc.ca/Project210/JsonSerializationDemo/blob/master/src/main/persistence/JsonWriter.java
 
 import model.*;
 import org.json.JSONObject;

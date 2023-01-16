@@ -1,7 +1,7 @@
 package ui;
 
 // This class has been created with help of WorkroomApp Class in JsonSerializationDemo
-//https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo/blob/master/src/main/persistence/JsonReader.java
+//https://github.students.cs.ubc.ca/Project210/JsonSerializationDemo/blob/master/src/main/persistence/JsonReader.java
 
 
 import model.AllProjects;
