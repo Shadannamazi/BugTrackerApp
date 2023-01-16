@@ -49,25 +49,8 @@ Some *features* of this application can include:
 - As a user, when I start the application, I want to be given the option to load 
 my projects along with its bugs from file
 
-# Instructions for Grader
-- You can generate the first required event related to adding projects to the all projects panel
-    by filling out the information fields and pressing the "Create New Project" button in the "Create New Project" tab
-- You can generate the second required event of removing a project from all projects by entering the number of the 
-project you want to remove and pressing the "Remove Project" button
-- You can select a project by clicking on the project button in the view all projects tab to open a new window 
-containing your selected project to view and add bugs to the project
-- You can generate the first required event related to adding bugs to the project
-    by filling out the information fields and pressing the "Create New Bug" button in the "Create New Bug" tab
-- You can generate the second required event of removing a bug from a project by entering the number of the
-    bug you want to remove and pressing the "Remove Bug" button
-- You can view all projects added by clicking the view all projects tab 
-- You can view all bugs added by clicking the view all bugs tab
-- You can locate my visual at the top left of the frames
-- You can save the state of my application by clicking on the "Save Activity" button
-- You can reload the state of my application by clicking on the "Load Activity" button
-- You can refresh the state of the application by clicking on the "Refresh" button
+#EventLog
 
-### Phase 4: Task 2
 Mon Nov 28 14:52:06 PST 2022
 Loaded all projects
 
@@ -132,24 +115,6 @@ Mon Nov 28 14:57:11 PST 2022
 Saved all projects
 
 
-### Phase 4: Task 3
-If I had more time to work on this project i would make the following changes to my project to increase cohesion 
-and decrease code duplication:
-- Make AllProjectsFrame which represents all the projects extend AllFrames as there is a lot of duplication
-between the AllFrames class and AllProjects class. This way I would refactor all the duplicate
-code between the AllProjectsFrame and Project frame into the abstract class ALlFrames.
-
-
-- Use the single responsibility principle on the classes AllFrames, AllProjectsFrame and ProjectFrame 
-so that every class is centered around one cohesive concept by splitting the classes into two separate classes
-I would make a Tabs class in my ui package so that the AllFrames, AllProjectsFrame and ProjectFrame 
-classes can only be focused on creating the frames and the tabs would be created in a separate class so that 
-each class only has one responsibility.
-
- 
-- Make a method that would take a JPanel, and a JButton as arguments, and would create the settings of the button 
-and add it to the given panel. This would be done in order to avoid cohesion, and to make the method reusable for other 
-panels within the class.
 
 
 
