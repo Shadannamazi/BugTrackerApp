@@ -1,6 +1,5 @@
 # Bug Tracker Application 
 
-
 ### What is a ***Bug Tracker***?
 This is a bug tracking desktop application that lets users add bugs and errors 
 they have encountered in order to keep track of all bugs and information related 
